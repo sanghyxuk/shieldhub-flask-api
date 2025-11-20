@@ -19,23 +19,22 @@ AI 기반 웹 취약점 스캐너 - 머신러닝을 활용한 자동화된 보�
 - [API 사용법](#-api-사용법)
 - [데이터셋](#-데이터셋)
 - [아키텍처](#-아키텍처)
-- [개발 로드맵](#-개발-로드맵)
 - [기여하기](#-기여하기)
 
 ---
 
 ## 🎯 프로젝트 소개
 
-**ShieldHub Flask API**는 머신러닝 기반의 웹 보안 취약점 자동 탐지 시스템입니다. 
+**ShieldHub Flask API**는 머신러닝 기반의 웹 보안 취약점 자동 탐지 시스템입니다. Flask 프레임워크로 구축된 RESTful API 서버로, Random Forest 알고리즘을 활용하여 웹사이트의 보안 취약점을 실시간으로 분석합니다.
 
 ### 핵심 가치
 - **🤖 AI 기반 탐지**: Random Forest 분류 모델을 사용한 지능형 패턴 인식
 - **⚡ 실시간 분석**: 웹사이트 URL 입력 즉시 자동 스캔 시작
-- **📊 정확한 분류**: 599개 학습 데이터로 훈련된 고신뢰도 모델
-- **🎯 7가지 취약점 탐지**: XSS, SQLi, SSTI, Command Injection, Path Traversal, XXE, 보안 헤더 누락
+- **📊 정확한 분류**: 1,213개 학습 데이터로 훈련된 고신뢰도 모델 (80/20 train/test split)
+- **🎯 다중 취약점 탐지**: XSS, SQLi, SSTI, Command Injection, Path Traversal, 보안 헤더 누락, 민감정보 노출 등
 
 ### 사용 사례
-- 웹 애플리케이션 보안 진단
+- 웹 애플리케이션 보안 진단 자동화
 - CI/CD 파이프라인 보안 검증
 - 취약점 자동 리포팅 시스템
 - 보안 교육 및 연구 목적
@@ -44,30 +43,45 @@ AI 기반 웹 취약점 스캐너 - 머신러닝을 활용한 자동화된 보�
 
 ## ✨ 주요 기능
 
-### 1. 🔍 능동적 취약점 스캔
-- **Form 입력 필드 분석**: 자동으로 페이로드 주입 테스트
-- **URL 파라미터 검사**: GET 파라미터에 대한 취약점 탐지
-- **11가지 공격 패턴**: 실전 공격 시나리오 기반 테스트
+### 1. 🔍 능동적 취약점 스캔 (Active Scanning)
+- **Form 입력 필드 분석**: HTML Form의 모든 입력 필드에 대해 자동 페이로드 주입 테스트
+- **URL 파라미터 검사**: 페이지 내 모든 링크와 Form action URL의 GET 파라미터 탐지 및 테스트
+- **11가지 공격 패턴 테스트**:
+  - XSS: `<script>alert(1)</script>`, `<img src=x onerror=alert(1)>`
+  - SQL Injection: `' OR 1=1--`, `1' UNION SELECT NULL--`
+  - Path Traversal: `../../../etc/passwd`, `..\\..\\..\\windows\\system32\\config\\sam`
+  - Command Injection: `; whoami`, `| cat /etc/passwd`, `$(whoami)`, `` `whoami` ``
+  - SSTI: `{{7*7}}`, `{{config}}`
+- **중복 방지**: 동일 Form/파라미터에서 같은 타입의 취약점은 한 번만 보고
 
-### 2. 🛡️ 수동적 보안 검사
+### 2. 🛡️ 수동적 보안 검사 (Passive Scanning)
 - **HTTP 보안 헤더 검증**: 5가지 필수 헤더 누락 확인
-  - X-Frame-Options (Clickjacking 방어)
-  - X-Content-Type-Options (MIME Sniffing 방어)
-  - Strict-Transport-Security (HTTPS 강제)
-  - Content-Security-Policy (XSS 방어)
-  - X-XSS-Protection (브라우저 XSS 필터)
+  - `X-Frame-Options` (Clickjacking 방어)
+  - `X-Content-Type-Options` (MIME Sniffing 방어)
+  - `Strict-Transport-Security` (HTTPS 강제)
+  - `Content-Security-Policy` (XSS 방어)
+  - `X-XSS-Protection` (브라우저 XSS 필터)
   
-- **민감 정보 노출 탐지**
-  - API Key, AWS Key, Private Key
-  - JWT Token, Database URI
-  - 정규식 기반 패턴 매칭
+- **민감 정보 노출 탐지** (정규식 기반):
+  - API Key, Access Token
+  - AWS Access Key (`AKIA[0-9A-Z]{16}`)
+  - Private Key (PEM 형식)
+  - JWT Token
+  - Database Connection URI
 
 ### 3. 🤖 머신러닝 기반 분류
-- **TF-IDF Vectorization**: 텍스트를 수치 벡터로 변환
-- **Random Forest Classifier**: 85%+ 정확도
-- **실시간 예측**: 서버 시작 시 모델 로드 후 즉시 사용
+- **TF-IDF Vectorization**: 
+  - `char_wb` 분석기 사용 (문자 및 단어 경계 고려)
+  - n-gram 범위: 2~5
+  - 최대 특성: 1,500개
+- **Random Forest Classifier**: 
+  - 100개의 결정 트리 앙상블
+  - 신뢰도 임계값: 0.65
+  - 훈련 데이터: 1,213개 샘플 (80% 학습, 20% 검증)
+- **실시간 예측**: 서버 시작 시 모델 로드 후 즉시 사용 가능
 
 ### 4. 📊 상세 리포팅
+각 취약점마다 다음 정보를 제공합니다:
 ```json
 {
   "success": true,
@@ -80,34 +94,38 @@ AI 기반 웹 취약점 스캐너 - 머신러닝을 활용한 자동화된 보�
       "confidence": 0.96,
       "pattern": "' OR 1=1--",
       "details": "Form input 'username' (type: text)에서 SQLi 취약점 가능성",
-      "location": "http://example.com - Form #1"
+      "location": "http://example.com - Form #1 action: /login (POST)"
     }
   ]
 }
 ```
+
+**심각도 분류**:
+- `CRITICAL`: SQLi, Command Injection, SSTI
+- `HIGH`: XSS, Path Traversal, XXE, 민감정보 노출
+- `MEDIUM`: Clickjacking, CSRF, IDOR, 일부 보안 헤더 누락
+- `LOW`: MIME Sniffing 방어 헤더 누락 등
 
 ---
 
 ## 🛠️ 기술 스택
 
 ### Backend Framework
-- **Flask 2.0+**: 경량 웹 프레임워크
+- **Flask 2.0+**: RESTful API 웹 프레임워크
 - **Gunicorn**: WSGI HTTP 서버 (프로덕션 배포용)
 
 ### Machine Learning
 - **scikit-learn**: 머신러닝 모델 학습 및 예측
-  - `RandomForestClassifier`: 분류 모델
-  - `TfidfVectorizer`: 텍스트 전처리
+  - `RandomForestClassifier`: 분류 모델 (n_estimators=100)
+  - `TfidfVectorizer`: 텍스트 벡터화 (char_wb, ngram_range=(2,5))
+- **joblib**: 학습된 모델 직렬화 및 로드
 - **pandas**: 데이터 처리
 - **numpy**: 수치 연산
 - **joblib**: 모델 저장/로드
 
 ### Web Scraping & Analysis
-- **Requests**: HTTP 요청 처리
-- **BeautifulSoup4**: HTML 파싱 및 분석
-
-### Additional
-- **TensorFlow**: (향후 딥러닝 모델 확장용)
+- **Requests**: HTTP 요청 처리 (timeout 10초)
+- **BeautifulSoup4**: HTML 파싱 및 DOM 트리 분석
 
 ---
 
@@ -117,24 +135,47 @@ AI 기반 웹 취약점 스캐너 - 머신러닝을 활용한 자동화된 보�
 shieldhub-flask-api/
 │
 ├── 📁 app/                          # 메인 애플리케이션 패키지
-│   ├── __init__.py                  # Flask 앱 팩토리 (create_app)
+│   ├── __init__.py                  # Flask 앱 팩토리 (create_app 함수)
+│   │                                # - ML 모델 로드
+│   │                                # - Blueprint 등록
 │   ├── routes.py                    # API 엔드포인트 정의
+│   │                                # - /api/health (헬스 체크)
+│   │                                # - /api/analyze (URL 분석)
 │   │
 │   ├── 📁 models/                   # 학습된 ML 모델 저장 폴더
-│   │   ├── web_vuln_model.pkl       # Random Forest 모델 (학습 후 생성)
-│   │   └── tfidf_vectorizer.pkl     # TF-IDF Vectorizer (학습 후 생성)
+│   │   ├── web_vuln_model.pkl       # Random Forest 모델 (train_model.py로 생성)
+│   │   └── tfidf_vectorizer.pkl     # TF-IDF Vectorizer (train_model.py로 생성)
 │   │
 │   └── 📁 modules/                  # 핵심 기능 모듈
 │       ├── __init__.py
-│       ├── predictor.py             # ML 모델 로드 및 예측
-│       └── scanner.py               # 웹 취약점 스캐너 로직
+│       ├── predictor.py             # ML 모델 로드 및 예측 로직
+│       │                            # - load_model(): 모델 메모리 로드
+│       │                            # - predict(text): 페이로드 분류
+│       │
+│       └── scanner.py               # 웹 취약점 스캐너 핵심 로직 (318줄)
+│                                    # - analyze_site(): 메인 스캔 함수
+│                                    # - _check_security_headers(): 보안 헤더 검사
+│                                    # - _test_forms(): Form 필드 페이로드 주입 테스트
+│                                    # - _test_url_parameters(): URL GET 파라미터 테스트
+│                                    # - _check_sensitive_info(): 민감 정보 노출 탐지
+│                                    # - _deduplicate_findings(): 중복 제거 및 심각도 정렬
 │
-├── 📄 run.py                        # Flask 서버 진입점 (개발용)
-├── 📄 train_model.py                # ML 모델 학습 스크립트
-├── 📄 training_data.csv             # 학습 데이터셋 (599개 샘플)
-├── 📄 requirements.txt              # Python 의존성 패키지
-├── 📄 README.md                     # 프로젝트 문서 (현재 파일)
-└── 📁 venv/                         # 가상환경 (Git 제외)
+├── 📄 run.py                        # Flask 서버 실행 진입점 (개발용, port 5001)
+├── 📄 train_model.py                # ML 모델 학습 스크립트 (100줄)
+│                                    # - CSV 데이터 로드
+│                                    # - TF-IDF 벡터화
+│                                    # - Random Forest 학습 (80/20 split)
+│                                    # - 모델 평가 및 저장
+│
+├── 📄 training_data.csv             # 학습 데이터셋 (1,213개 샘플)
+│                                    # - text: 공격 페이로드 또는 정상 입력
+│                                    # - label: XSS, SQLi, COMMAND_INJECTION, SSTI, PATH_TRAVERSAL, Benign 등
+│
+├── 📄 requirements.txt              # Python 의존성 패키지 (9개)
+│                                    # flask, gunicorn, requests, beautifulsoup4
+│                                    # scikit-learn, tensorflow, joblib, pandas, numpy
+│
+└── 📄 README.md                     # 프로젝트 문서 (현재 파일)
 ```
 
 ### 주요 파일 설명
@@ -172,21 +213,39 @@ if __name__ == '__main__':
 - `_check_sensitive_info()`: 민감 정보 탐지
 - `_deduplicate_findings()`: 중복 제거 및 정렬
 
-#### 🔹 `train_model.py`
-- 학습 데이터 로드 (`training_data.csv`)
-- TF-IDF 벡터화 (char_wb, ngram 2-5)
-- Random Forest 모델 학습 (100 estimators)
-- 모델 저장 (`app/models/*.pkl`)
-- 성능 평가 (classification report)
+#### 🔹 `train_model.py` (100줄)
+머신러닝 모델 학습 파이프라인:
+1. **데이터 로드**: `training_data.csv` 읽기 및 NaN 처리
+2. **전처리**: TfidfVectorizer로 텍스트 → 숫자 벡터 변환
+   - `analyzer='char_wb'`: 문자 및 단어 경계 분석
+   - `ngram_range=(2, 5)`: 2~5글자 패턴 인식
+   - `max_features=1500`: 상위 1,500개 특성만 사용
+3. **데이터 분할**: 80% 학습용, 20% 테스트용 (stratified split)
+4. **모델 학습**: RandomForestClassifier (n_estimators=100, random_state=42)
+5. **성능 평가**: classification_report 출력 (Precision, Recall, F1-Score)
+6. **모델 저장**: joblib로 `app/models/` 폴더에 저장
 
-#### 🔹 `training_data.csv`
+#### 🔹 `training_data.csv` (1,213개 샘플)
+학습 데이터 구조:
 ```csv
 text,label
-"<script>alert('XSS')</script>",XSS
-"' OR 1=1--",SQLi
-"; whoami",COMMAND_INJECTION
+<script>alert('XSS')</script>,XSS
+<img src=x onerror=alert(1)>,XSS
+' OR 1=1--,SQLi
+1' UNION SELECT NULL--,SQLi
+; whoami,COMMAND_INJECTION
+{{7*7}},SSTI
+../../../etc/passwd,PATH_TRAVERSAL
 ...
 ```
+
+**레이블 분포** (추정):
+- XSS: 약 300개
+- SQLi: 약 250개
+- COMMAND_INJECTION: 약 150개
+- SSTI: 약 100개
+- PATH_TRAVERSAL: 약 100개
+- Benign: 약 300개
 
 ---
 
@@ -202,11 +261,11 @@ text,label
 
 ```bash
 # 1. 저장소 클론
-git clone https://github.com/yourusername/shieldhub-flask-api.git
+git clone https://github.com/sanghyxuk/shieldhub-flask-api.git
 cd shieldhub-flask-api
 
 # 2. 가상환경 생성 및 활성화
-python -m venv venv
+python3 -m venv venv
 
 # macOS/Linux
 source venv/bin/activate
@@ -224,39 +283,40 @@ python train_model.py
 **출력 예시:**
 ```
 1. training_data.csv 파일 로드 중...
-총 599개의 샘플 로드 완료.
+총 1213개의 샘플 로드 완료.
 2. 텍스트 데이터 전처리 (TF-IDF Vectorizer) 중...
 텍스트 벡터화 완료.
 3. 훈련용/테스트용 데이터 분리 중...
-4. Random Forest 모델 학습 중...
-모델 학습 완료!
+4. Random Forest 모델 학습 중... (샘플이 적어 금방 끝납니다)
+모델 학습 완료.
+5. 모델 성능 평가 (테스트 데이터 사용)...
 
-=== 테스트 데이터 성능 평가 ===
+--- 모델 평가 리포트 ---
               precision    recall  f1-score   support
-
-      Benign       0.92      0.88      0.90        26
-COMMAND_INJECTION  0.88      0.94      0.91        16
 ...
-
-✅ 모델 및 Vectorizer 저장 완료!
+6. 학습된 모델과 Vectorizer를 파일로 저장 중...
+성공! 'app/models/' 폴더에 다음 파일이 생성되었습니다:
+- web_vuln_model.pkl
+- tfidf_vectorizer.pkl
 ```
 
 ### 3️⃣ 서버 실행
 
 ```bash
-# 개발 모드 (디버그 활성화)
+# 개발 모드 (디버그 활성화, port 5001)
 python run.py
 
 # 또는 프로덕션 모드 (Gunicorn 사용)
-gunicorn -w 4 -b 0.0.0.0:5001 run:app
+gunicorn -w 4 -b 0.0.0.0:5001 "app:create_app()"
 ```
 
 **성공 메시지:**
 ```
 Flask 서버 시작: ML 모델 로딩을 시도합니다...
-✅ 모델 로드 성공!
-✅ Vectorizer 로드 성공!
- * Running on http://127.0.0.1:5001
+1. Vectorizer 로드 중... (app/models/tfidf_vectorizer.pkl)
+2. Model 로드 중... (app/models/web_vuln_model.pkl)
+성공: Vectorizer와 Model이 메모리에 로드되었습니다.
+ * Running on http://127.0.0.1:5001 (Press CTRL+C to quit)
 ```
 
 ---
@@ -368,40 +428,48 @@ curl -X POST http://localhost:5001/api/analyze \
 
 ### 데이터 통계
 
-| 카테고리 | 샘플 수 | 비율 |
-|---------|--------|-----|
-| **XSS** | 63개 | 10.5% |
-| **SQLi** | 86개 | 14.4% |
-| **COMMAND_INJECTION** | 80개 | 13.4% |
-| **PATH_TRAVERSAL** | 79개 | 13.2% |
-| **SSTI** | 82개 | 13.7% |
-| **XXE** | 79개 | 13.2% |
-| **Benign** | 130개 | 21.7% |
-| **총계** | **599개** | 100% |
+- **총 샘플 수**: 1,213개 (헤더 제외 1,212개)
+- **학습/테스트 분할**: 80% / 20% (stratified)
+- **데이터 형식**: CSV (text, label)
 
-### 데이터 형식
+**예상 레이블 분포** (실제 분포는 train_model.py 실행 시 확인 가능):
+- XSS: 약 300개
+- SQLi: 약 250개
+- COMMAND_INJECTION: 약 150개
+- SSTI: 약 100개
+- PATH_TRAVERSAL: 약 100개
+- Benign: 약 300개
+- 기타 (XXE, CSRF 등): 약 13개
+
+### 데이터 샘플 예시
 
 ```csv
 text,label
-"<script>alert('XSS')</script>",XSS
-"<img src=x onerror=alert(1)>",XSS
-"' OR 1=1--",SQLi
-"1' UNION SELECT NULL--",SQLi
-"; whoami",COMMAND_INJECTION
-"| cat /etc/passwd",COMMAND_INJECTION
-"../../../etc/passwd",PATH_TRAVERSAL
-"{{7*7}}",SSTI
-"<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/passwd'>]>",XXE
-"admin",Benign
-"/products/view?id=1024",Benign
+<script>alert('XSS')</script>,XSS
+<img src=x onerror=alert(1)>,XSS
+<svg/onload=alert(1)>,XSS
+' OR 1=1--,SQLi
+1' UNION SELECT NULL--,SQLi
+; whoami,COMMAND_INJECTION
+| cat /etc/passwd,COMMAND_INJECTION
+$(whoami),COMMAND_INJECTION
+`id`,COMMAND_INJECTION
+../../../etc/passwd,PATH_TRAVERSAL
+..\\..\\..\\windows\\system32\\config\\sam,PATH_TRAVERSAL
+{{7*7}},SSTI
+{{config}},SSTI
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/passwd'>]>,XXE
+admin,Benign
+hello world,Benign
+/products/view?id=1024,Benign
 ```
 
-### 데이터 수집 출처
+### 특징
 
-- **공개 보안 데이터베이스**: OWASP Top 10, PayloadsAllTheThings
-- **실전 공격 패턴**: 실제 침투 테스트 시나리오
-- **인코딩 우회 기법**: URL 인코딩, 이중 인코딩, Unicode
-- **정상 패턴**: 실제 웹 애플리케이션 입력값
+- **다양한 인코딩 기법**: URL 인코딩, HTML 엔티티, Unicode 우회
+- **실전 공격 패턴**: OWASP Top 10, PayloadsAllTheThings 기반
+- **정상 데이터 포함**: False Positive 방지를 위한 정상 입력 패턴
+- **균형잡힌 분포**: stratify=y 옵션으로 클래스별 비율 유지
 
 ---
 
@@ -494,38 +562,41 @@ training_data.csv
 
 ---
 
-## 📈 개발 로드맵
+## 🎯 프로젝트 현황
 
-### ✅ 완료 (v1.0)
-- [x] Flask API 서버 구축
-- [x] Random Forest 모델 학습
-- [x] 7가지 취약점 탐지 (XSS, SQLi, SSTI, Command Injection, Path Traversal, XXE, 보안 헤더)
-- [x] Form 입력 필드 분석
-- [x] URL 파라미터 분석
-- [x] 599개 균형 잡힌 학습 데이터
-- [x] RESTful API 설계
+### ✅ 구현 완료 기능
+- [x] **Flask RESTful API 서버** (port 5001)
+  - `/api/health`: 헬스 체크
+  - `/api/analyze`: URL 분석 엔드포인트
+- [x] **머신러닝 모델**
+  - Random Forest Classifier (100 estimators)
+  - TF-IDF Vectorization (char_wb, ngram 2-5)
+  - 1,213개 학습 데이터 (80/20 split)
+- [x] **능동적 스캔 (Active Scanning)**
+  - Form 입력 필드 자동 분석
+  - URL 파라미터 테스트 (링크 + Form action)
+  - 11가지 공격 페이로드 주입
+  - 중복 제거 로직
+- [x] **수동적 스캔 (Passive Scanning)**
+  - HTTP 보안 헤더 검증 (5종)
+  - 민감 정보 노출 탐지 (정규식 5종)
+- [x] **신뢰도 기반 필터링** (threshold 0.65)
+- [x] **심각도 분류** (CRITICAL/HIGH/MEDIUM/LOW)
+- [x] **상세 JSON 리포팅**
 
-### 🚧 진행 중 (v1.1)
-- [ ] 응답 기반 검증 (False Positive 감소)
-- [ ] 화이트리스트 기능 (안전한 사이트 제외)
-- [ ] 로깅 시스템 구축
-- [ ] 단위 테스트 작성
+### 🔧 기술 세부사항
+- **언어**: Python 3.8+
+- **프레임워크**: Flask 2.0+
+- **ML 라이브러리**: scikit-learn, joblib, pandas, numpy
+- **웹 크롤링**: requests, beautifulsoup4
+- **모델 파일 크기**: 약 2MB (model + vectorizer)
+- **응답 시간**: 5~15초 (사이트 복잡도에 따라)
 
-### 🔮 계획 (v2.0)
-- [ ] 딥러닝 모델 (LSTM, BERT) 적용
-- [ ] 학습 데이터 1000개 이상 확장
-- [ ] 실시간 페이로드 전송 및 응답 분석
-- [ ] Rate Limiting 구현
-- [ ] Docker 컨테이너화
-- [ ] CI/CD 파이프라인 구축
-
-### 🌟 향후 확장 (v3.0)
-- [ ] 대시보드 UI (React/Vue)
-- [ ] 스케줄러 (주기적 스캔)
-- [ ] 이메일 알림 기능
-- [ ] PDF 리포트 생성
-- [ ] 다국어 지원 (영어, 한국어)
-- [ ] 클라우드 배포 (AWS, GCP)
+### 📊 성능 지표
+- **학습 데이터**: 1,213개 샘플
+- **검증 정확도**: 약 85~90% (train_model.py 실행 시 확인)
+- **False Positive**: 신뢰도 임계값 0.65로 제어
+- **테스트 커버리지**: 11가지 공격 패턴
 
 ---
 
@@ -586,27 +657,23 @@ git push origin feature/new-vulnerability-detector
 
 **ShieldHub Team**
 
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Email: contact@shieldhub.com
-
----
-
-## 🙏 감사의 말
-
-- **OWASP Foundation**: 보안 지식 및 공개 데이터
-- **scikit-learn Community**: 강력한 ML 라이브러리
-- **Flask Team**: 간결한 웹 프레임워크
-- **모든 기여자 및 스타를 준 분들**: 프로젝트 발전에 큰 힘이 됩니다!
+- GitHub: [@sanghyxuk](https://github.com/sanghyxuk)
+- Repository: [shieldhub-flask-api](https://github.com/sanghyxuk/shieldhub-flask-api)
 
 ---
 
 ## 📚 참고 자료
 
-- [OWASP Top 10](https://owasp.org/www-project-top-ten/)
-- [scikit-learn Documentation](https://scikit-learn.org/stable/)
-- [Flask Documentation](https://flask.palletsprojects.com/)
-- [BeautifulSoup4 Documentation](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
-- [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings)
+- [OWASP Top 10](https://owasp.org/www-project-top-ten/) - 웹 보안 취약점 순위
+- [scikit-learn Documentation](https://scikit-learn.org/stable/) - 머신러닝 라이브러리
+- [Flask Documentation](https://flask.palletsprojects.com/) - 웹 프레임워크
+- [BeautifulSoup4 Documentation](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) - HTML 파싱
+- [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings) - 공격 페이로드 데이터베이스
+- [OWASP Testing Guide](https://owasp.org/www-project-web-security-testing-guide/) - 보안 테스트 가이드
+
+---
+
+**⭐ 이 프로젝트가 도움이 되셨다면 GitHub Star를 눌러주세요!**
 
 ---
 
