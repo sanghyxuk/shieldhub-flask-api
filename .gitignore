@@ -35,10 +35,10 @@ instance/
 .webassets-cache
 
 # Machine Learning Models
-app/models/*.pkl
-*.h5
-*.model
-*.weights
+#app/models/*.pkl
+#*.h5
+#*.model
+#*.weights
 
 # IDE
 .vscode/
