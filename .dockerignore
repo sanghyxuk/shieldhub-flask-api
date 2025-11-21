@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# 학습 데이터 (배포 시 불필요)
+data/
+train_model.py
+*.csv
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+
+# 테스트
+tests/
+*.log
+
+# 기타
+README.md
+.DS_Store
+
+# app/models는 제외하지 않음 (학습된 모델 파일 필요)
+# 단, __pycache__는 제외
+app/models/__pycache__/
+app/modules/__pycache__/
+app/__pycache__/
